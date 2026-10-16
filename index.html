@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4A8CAD">
+    <meta name="description" content="Funny Bunny Course: bimbingan belajar Matematika dan Bahasa Inggris untuk siswa kelas 1-6 SD di Sumedang. Trial gratis 1 kali.">
+    <title>Funny Bunny Course - Learn, Leap, Shine!</title>
+    <link rel="icon" type="image/png" href="logo.png" onerror="this.href='https://cdn-icons-png.flaticon.com/512/3069/3069172.png'">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#243746', edge: '#4A8CAD',
+                        sky: { soft: '#E8F1F9', DEFAULT: '#7BAFD8', deep: '#2F6B8F' },
+                        bunny: { pink: '#FFBDCA', pinkDeep: '#B04565', butter: '#F9E7A0' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+                :root {
+            --ink: #243746;
+            --ink-soft: #5A6B78;
+            --edge: #4A8CAD;
+            --sky: #7BAFD8;
+            --sky-soft: #E8F1F9;
+            --sky-deep: #2F6B8F;
+            --pink: #FFBDCA;
+            --pink-soft: #FFE9EE;
+            --pink-deep: #B04565;
+            --butter: #F9E7A0;
+            --butter-soft: #FDF7D6;
+            --mint: #CDEBD9;
+            --mint-deep: #1F7048;
+            --paper: #FDFBEA;
+            --line: #E4E2CC;
+        }
+
+        * { -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Nunito', system-ui, sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, .font-display { font-family: 'Fredoka', 'Nunito', sans-serif; letter-spacing: -0.01em; }
+        .logo-font { font-family: 'Pacifico', cursive; }
+
+        :focus-visible { outline: 3px solid var(--pink-deep); outline-offset: 2px; border-radius: 6px; }
+
+        /* ---------- Buttons: "sticker" style ---------- */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+            padding: .65rem 1.35rem;
+            border: 2px solid var(--edge);
+            border-radius: 9999px;
+            font-weight: 800; font-size: .9rem; line-height: 1.2;
+            color: var(--ink);
+            background: #fff;
+            box-shadow: 0 3px 0 var(--edge);
+            cursor: pointer;
+            transition: transform .12s ease, box-shadow .12s ease, background .15s ease;
+            text-decoration: none;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 0 var(--edge); }
+        .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge); }
+        .btn-pink { background: var(--pink); }
+        .btn-pink:hover { background: #ffa9bb; }
+        .btn-blue { background: var(--sky); }
+        .btn-blue:hover { background: #69a1cf; }
+        .btn-butter { background: var(--butter); }
+        .btn-ghost { background: #fff; }
+        .btn-ghost:hover { background: var(--sky-soft); }
+        .btn-lg { padding: .85rem 1.7rem; font-size: 1rem; }
+        .btn-sm { padding: .35rem .9rem; font-size: .75rem; box-shadow: 0 2px 0 var(--edge); }
+        .btn-sm:hover { box-shadow: 0 3px 0 var(--edge); }
+        .btn-block { width: 100%; }
+        .btn-danger { background: #fff; color: #B42318; border-color: #B42318; box-shadow: 0 2px 0 #B42318; }
+
+        /* ---------- Surfaces ---------- */
+        .card {
+            background: #fff;
+            border: 1.5px solid var(--line);
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+        }
+        .card-hover { transition: transform .2s ease, border-color .2s ease; }
+        .card-hover:hover { transform: translateY(-3px); border-color: var(--sky); }
+        .sticker {
+            background: #fff;
+            border: 2px solid var(--edge);
+            border-radius: 1.5rem;
+            box-shadow: 5px 5px 0 var(--edge);
+        }
+
+        /* ---------- Inputs ---------- */
+        .inp {
+            width: 100%;
+            border: 2px solid var(--line);
+            border-radius: .8rem;
+            padding: .6rem .9rem;
+            background: #fff;
+            color: var(--ink);
+            font-size: .9rem;
+            font-weight: 600;
+            transition: border-color .15s ease, box-shadow .15s ease;
+        }
+        .inp::placeholder { color: #9AA3BD; font-weight: 400; }
+        .inp:focus { outline: none; border-color: var(--edge); box-shadow: 0 0 0 4px rgba(123,175,216,.35); }
+        label.lbl { display: block; font-size: .8rem; font-weight: 800; margin-bottom: .3rem; color: var(--ink); }
+
+        /* ---------- Tabs & chips ---------- */
+        .tab {
+            display: inline-flex; align-items: center; gap: .5rem;
+            padding: .55rem 1.1rem;
+            border: 2px solid var(--line);
+            background: #fff;
+            border-radius: 9999px;
+            font-weight: 800; font-size: .85rem;
+            white-space: nowrap; cursor: pointer;
+            color: var(--ink-soft);
+            transition: all .15s ease;
+        }
+        .tab:hover { border-color: var(--ink); color: var(--ink); }
+        .tab.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+        .mtab { padding: .4rem .8rem; border-radius: .7rem; font-weight: 800; font-size: .75rem; background: var(--paper); color: var(--ink-soft); white-space: nowrap; }
+        .mtab:hover { background: var(--sky-soft); }
+        .mtab.on { background: var(--ink); color: #fff; }
+
+        .chip { display: inline-flex; align-items: center; gap: .3rem; padding: .15rem .65rem; border-radius: 9999px; font-size: .7rem; font-weight: 800; }
+        .chip-ok { background: var(--mint); color: #145C38; }
+        .chip-warn { background: var(--butter); color: #6B4E00; }
+        .chip-info { background: var(--sky-soft); color: var(--sky-deep); }
+        .chip-pink { background: var(--pink-soft); color: var(--pink-deep); }
+        .chip-bad { background: #FDE2E0; color: #8A1C14; }
+
+        .filter-pill { padding: .3rem .85rem; border-radius: 9999px; font-size: .75rem; font-weight: 800; background: var(--paper); color: var(--ink-soft); border: 1.5px solid var(--line); }
+        .filter-pill.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+        /* ---------- Header ---------- */
+        .site-header { background: rgba(255,255,255,.92); backdrop-filter: blur(10px); border-bottom: 2px solid var(--edge); }
+        .nav-link { font-weight: 800; font-size: .9rem; color: var(--ink); padding: .35rem .2rem; background: linear-gradient(var(--pink), var(--pink)) no-repeat 0 100% / 0 3px; transition: background-size .2s ease; }
+        .nav-link:hover { background-size: 100% 3px; }
+
+        /* ---------- Hero ---------- */
+        .hero-bg {
+            background-color: var(--paper);
+            background-image: radial-gradient(var(--sky) 1.2px, transparent 1.2px);
+            background-size: 22px 22px;
+        }
+        .hero-bg::after { content: ""; position: absolute; inset: auto 0 0 0; height: 90px; background: linear-gradient(to bottom, transparent, var(--paper)); pointer-events: none; }
+
+        .notebook {
+            background:
+                repeating-linear-gradient(transparent 0, transparent 27px, #DCEBF1 27px, #DCEBF1 28px),
+                #fff;
+            position: relative;
+        }
+        .notebook::before { /* margin line */
+            content: ""; position: absolute; left: 2.6rem; top: 0; bottom: 0; width: 2px; background: var(--pink-soft);
+        }
+        .tape { position: absolute; top: -14px; left: 50%; width: 92px; height: 26px; transform: translateX(-50%) rotate(-3deg); background: rgba(255,224,138,.85); border: 1.5px dashed rgba(35,41,74,.25); }
+        .sticky-note { background: var(--butter); transform: rotate(2.2deg); box-shadow: 3px 3px 0 rgba(35,41,74,.18); }
+
+        @keyframes bob { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-6px) rotate(2deg); } }
+        .bob { animation: bob 4s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) { .bob { animation: none; } html { scroll-behavior: auto !important; } }
+
+        /* ---------- Pricing ---------- */
+        .price { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 2.4rem; line-height: 1; letter-spacing: -0.02em; }
+        .price-card { border: 2px solid var(--edge); border-radius: 1.4rem; background: #fff; padding: 1.5rem 1.25rem 1.25rem; position: relative; display: flex; flex-direction: column; transition: transform .2s ease; }
+        .price-card:hover { transform: translateY(-4px); }
+        .price-card.hot { background: var(--pink-soft); box-shadow: 5px 5px 0 var(--edge); }
+        .seats { display: flex; gap: 4px; justify-content: center; margin: .6rem 0 1rem; }
+        .seats i { width: 16px; height: 16px; border-radius: 50%; background: var(--sky); border: 2px solid var(--edge); display: block; }
+        .price-card.hot .seats i { background: var(--pink); }
+
+        /* ---------- Tables ---------- */
+        .tbl { width: 100%; border-collapse: collapse; font-size: .82rem; text-align: left; }
+        .tbl thead th { background: var(--sky-soft); font-weight: 800; padding: .7rem .9rem; white-space: nowrap; border-bottom: 2px solid var(--line); }
+        .tbl tbody td { padding: .75rem .9rem; border-bottom: 1px solid #ECEAD6; vertical-align: top; }
+        .tbl tbody tr:hover { background: #FAFDFE; }
+
+        /* ---------- Modal ---------- */
+        .modal-card { background: #fff; border: 2px solid var(--edge); border-radius: 1.5rem; box-shadow: 6px 6px 0 var(--edge); }
+        .modal-close { position: absolute; top: .9rem; right: .9rem; width: 2.1rem; height: 2.1rem; border-radius: 50%; background: var(--paper); border: 2px solid var(--edge); font-weight: 800; display: flex; align-items: center; justify-content: center; z-index: 5; }
+        .modal-close:hover { background: var(--pink-soft); }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--paper); }
+        ::-webkit-scrollbar-thumb { background: var(--sky); border-radius: 10px; }
+
+        .burst { position: absolute; top: -1.6rem; right: -1rem; z-index: 20; width: 6.2rem; height: 6.2rem; border-radius: 50%; background: var(--butter); border: 2px solid var(--edge); box-shadow: 3px 3px 0 var(--edge); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-family: 'Fredoka', sans-serif; font-weight: 700; line-height: 1; font-size: 1.15rem; transform: rotate(10deg); }
+        .burst small { font-family: 'Nunito', sans-serif; font-size: .7rem; font-weight: 800; margin-top: .25rem; }
+        .stat-top { height: 6px; border-radius: 6px 6px 0 0; margin: -1.25rem -1.25rem 1rem; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-40 site-header">
+        <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+            <a onclick="go('home')" class="flex items-center gap-3 cursor-pointer group" role="button" tabindex="0" onkeydown="if(event.key==='Enter')go('home')">
+                <img src="logo.png" alt="Logo Funny Bunny Course" class="w-12 h-12 rounded-full object-contain group-hover:rotate-6 transition">
+                <div class="leading-none">
+                    <span class="logo-font text-[1.6rem] tracking-wide block">
+                        <span class="text-pink-600" style="color:var(--pink-deep)">Funny</span> <span style="color:var(--sky-deep)">Bunny</span>
+                    </span>
+                    <span class="block text-[10px] font-extrabold tracking-[0.3em] text-ink/70 mt-0.5">COURSE</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-7">
+                <button onclick="go('home')" class="nav-link">Beranda</button>
+                <button onclick="scrollToId('program')" class="nav-link">Program</button>
+                <button onclick="scrollToId('harga')" class="nav-link">Harga</button>
+                <button onclick="scrollToId('kontak')" class="nav-link">Kontak</button>
+            </nav>
+
+            <div id="nav-actions" class="flex items-center gap-2"></div>
+        </div>
+        <nav class="md:hidden border-t border-line overflow-x-auto" style="border-color:var(--line)">
+            <div class="flex gap-5 px-4 py-2 text-sm font-extrabold whitespace-nowrap">
+                <button onclick="go('home')">Beranda</button>
+                <button onclick="scrollToId('program')">Program</button>
+                <button onclick="scrollToId('harga')">Harga</button>
+                <button onclick="scrollToId('daftar')">Daftar</button>
+                <button onclick="scrollToId('kontak')">Kontak</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main id="app" class="flex-grow"></main>
+
+    <!-- FOOTER -->
+    <footer class="bg-ink text-white pt-14 pb-8 mt-16">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+            <div>
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-full bg-white p-1 flex items-center justify-center overflow-hidden">
+                        <img src="logo.png" alt="Logo Footer" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3069/3069172.png';">
+                    </div>
+                    <span class="logo-font text-2xl" style="color:var(--pink)">Funny Bunny Course</span>
+                </div>
+                <p class="text-slate-300 text-sm leading-relaxed mb-4 max-w-sm">
+                    Bimbingan belajar Matematika &amp; Bahasa Inggris untuk siswa kelas 1–6 SD. Belajar menyenangkan, privat dan kelompok kecil.
+                </p>
+                <span class="inline-block text-ink text-sm font-extrabold px-4 py-1 rounded-full" style="background:var(--butter)">Learn, Leap, Shine!</span>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-lg mb-3" style="color:var(--sky)">Alamat belajar</h4>
+                <div class="space-y-3 text-sm text-slate-300">
+                    <p><i class="fa-solid fa-location-dot mr-2" style="color:var(--pink)"></i><strong class="text-white">Kojengkang:</strong> Dusun Kojengkang No. 24, RT 01/RW 10, Desa Licin, Kecamatan Cimalaka, Kabupaten Sumedang, Jawa Barat 45353.</p>
+                    <p><i class="fa-solid fa-location-dot mr-2" style="color:var(--pink)"></i><strong class="text-white">Anggrek:</strong> Lingkungan Anggrek, RT 003/RW 002, Gang Al-Huda 1 No. 1, Kotakaler, Kecamatan Sumedang Utara, Kabupaten Sumedang, Jawa Barat 45322.</p>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-lg mb-3" style="color:var(--pink)">Hubungi kami</h4>
+                <div class="space-y-2 text-sm text-slate-300 mb-4">
+                    <p><i class="fa-brands fa-whatsapp text-green-400 mr-2"></i>WA Admin: 0812-6963-9158</p>
+                    <p><a href="https://www.instagram.com/funnybunny.course" target="_blank" rel="noopener" class="hover:text-white underline-offset-2 hover:underline"><i class="fa-brands fa-instagram text-pink-400 mr-2"></i>Instagram: @funnybunny.course</a></p>
+                    <p><a href="https://www.tiktok.com/@funnybunny.course" target="_blank" rel="noopener" class="hover:text-white underline-offset-2 hover:underline"><i class="fa-brands fa-tiktok text-white mr-2"></i>TikTok: @funnybunny.course</a></p>
+                </div>
+                <a href="https://wa.me/6281269639158" target="_blank" rel="noopener" class="btn btn-pink btn-sm btn-block" style="border-color:#fff;box-shadow:0 3px 0 #fff;padding:.6rem 1rem;font-size:.85rem">
+                    <i class="fa-brands fa-whatsapp text-base"></i> Chat WA admin sekarang
+                </a>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 mt-10 pt-6 border-t border-white/15 text-center text-xs text-slate-400">
+            &copy; 2026 Funny Bunny Course. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- TOAST -->
+    <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 left-1/2 -translate-x-1/2 text-ink font-extrabold px-6 py-3 rounded-full z-[60] hidden items-center gap-2 border-2 border-edge text-sm max-w-[90vw]" style="background:var(--butter);box-shadow:0 4px 0 var(--edge)">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toast-msg">Pesan</span>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="modal-lightbox" class="fixed inset-0 bg-ink/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="closeModal('modal-lightbox')">
+        <div class="modal-card max-w-3xl w-full p-4 relative" onclick="event.stopPropagation()">
+            <button onclick="closeModal('modal-lightbox')" class="modal-close" aria-label="Tutup">✕</button>
+            <div class="overflow-hidden rounded-2xl bg-slate-100 max-h-[60vh] flex items-center justify-center mb-3">
+                <img id="lightbox-img" src="" class="max-w-full max-h-[60vh] object-contain" alt="Foto LKPD">
+            </div>
+            <div class="space-y-1 text-left px-1 pb-1">
+                <div class="flex items-center justify-between gap-2">
+                    <span id="lightbox-category" class="chip chip-pink">Kategori</span>
+                    <span id="lightbox-date" class="text-xs text-slate-500 font-bold">Tanggal</span>
+                </div>
+                <h3 id="lightbox-title" class="font-bold text-xl">Judul Foto</h3>
+                <p id="lightbox-desc" class="text-sm text-slate-600 leading-relaxed"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL KELOLA PROGRESS -->
+    <div id="modal-admin-manage-student" class="fixed inset-0 bg-ink/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="closeModal('modal-admin-manage-student')">
+        <div class="modal-card p-6 max-w-3xl w-full relative max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+            <button onclick="closeModal('modal-admin-manage-student')" class="modal-close" aria-label="Tutup">✕</button>
+
+            <div class="border-b-2 pb-3 mb-4 pr-10" style="border-color:var(--line)">
+                <h3 id="admin-modal-student-name" class="text-2xl font-bold">Nama Siswa</h3>
+                <p id="admin-modal-student-sub" class="text-sm text-slate-500">Kelas • Paket • Status</p>
+            </div>
+
+            <div class="flex gap-1.5 pb-3 mb-4 overflow-x-auto">
+                <button onclick="setAdminModalTab('absensi')" id="btn-mod-absensi" class="mtab on"><i class="fa-solid fa-calendar-check mr-1"></i> Absensi</button>
+                <button onclick="setAdminModalTab('notes')" id="btn-mod-notes" class="mtab"><i class="fa-solid fa-note-sticky mr-1"></i> Catatan Tutor</button>
+                <button onclick="setAdminModalTab('guide')" id="btn-mod-guide" class="mtab"><i class="fa-solid fa-lightbulb mr-1"></i> Parent Guide</button>
+                <button onclick="setAdminModalTab('portfolio')" id="btn-mod-portfolio" class="mtab"><i class="fa-solid fa-images mr-1"></i> Album LKPD</button>
+                <button onclick="setAdminModalTab('status')" id="btn-mod-status" class="mtab"><i class="fa-solid fa-credit-card mr-1"></i> Status Bayar</button>
+            </div>
+
+            <div id="admin-modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        // ===== KONFIGURASI DATABASE (SUPABASE) =====
+        // Ganti dua nilai ini dengan data dari Supabase: Project Settings > API
+        const SUPABASE_URL = 'https://lfslmkwusgtzelvlimeh.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxmc2xta3d1c2d0emVsdmxpbWVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIxMDIyMzMsImV4cCI6MjEwNzY3ODIzM30.jgC8bYcnyiY4b7HDIlcR3ZGr9HQoeF60YmeVI7PRBuU';
+
+        const DB_READY = !SUPABASE_URL.startsWith('ISI_') && !!window.supabase;
+        const db = DB_READY ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+        if (!db) console.warn('Database belum dihubungkan. Isi SUPABASE_URL dan SUPABASE_ANON_KEY di index.html.');
+
+        const ADMIN_WA = '6281269639158';
+
+        // Orang tua masuk dengan USERNAME. Supabase mewajibkan email, jadi username diubah
+        // otomatis menjadi "username@AUTH_EMAIL_DOMAIN" di belakang layar.
+        // Gunakan domain yang valid (sebaiknya milik Anda sendiri). Jangan diubah setelah ada pengguna.
+        const AUTH_EMAIL_DOMAIN = 'funnybunny.id';
+        const toEmail = u => {
+            const x = String(u || '').trim().toLowerCase();
+            return x.includes('@') ? x : x + '@' + AUTH_EMAIL_DOMAIN;   // admin boleh pakai email aslinya
+        };
+
+        const S = {
+            page: 'home',
+            user: null,
+            isAdmin: false,
+            student: null,
+            loading: true,
+            studentTab: 'absensi',
+            adminTab: 'students',
+            portfolioFilter: 'all',
+            gameGradeFilter: 'all',
+            studentStatusFilter: 'all',
+            studentSearchQuery: '',
+            adminModalTab: 'absensi',
+            selectedStudentId: null,
+            students: [],
+            games: [],
+            testimonials: []
+        };
+
+        // ===== UTILS =====
+        const $ = selector => document.querySelector(selector);
+        const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        let toastTimer;
+        const toast = m => {
+            const t = $('#toast');
+            $('#toast-msg').textContent = m;
+            t.classList.remove('hidden');
+            t.classList.add('flex');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => { t.classList.add('hidden'); t.classList.remove('flex'); }, 3200);
+        };
+        const closeModal = id => {
+            const el = document.getElementById(id);
+            if (el) { el.classList.add('hidden'); el.classList.remove('flex'); }
+        };
+        const openModal = id => {
+            const el = document.getElementById(id);
+            if (el) { el.classList.remove('hidden'); el.classList.add('flex'); }
+        };
+        const go = p => { S.page = p; render(); window.scrollTo(0, 0); };
+        const scrollToId = id => {
+            if (S.page !== 'home') { S.page = 'home'; render(); }
+            setTimeout(() => {
+                const el = document.getElementById(id);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        };
+        const fd = form => Object.fromEntries(new FormData(form));
+        const safeUrl = u => /^https?:\/\//i.test(String(u || '')) ? u : '#';
+        const fmtDate = d => {
+            const x = new Date(d + 'T00:00:00');
+            return isNaN(x) ? d : x.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+        };
+        const statusChip = st => st === 'Hadir' ? 'chip-ok' : (st === 'Tanpa Keterangan' ? 'chip-bad' : 'chip-warn');
+        const payChip = st => st === 'Sudah Bayar' ? 'chip-ok' : (st === 'Belum Bayar' ? 'chip-bad' : 'chip-warn');
+
+        function calcAttendanceStats(attList = []) {
+            const total = attList.length;
+            const hadir = attList.filter(a => a.status === 'Hadir').length;
+            const izin = attList.filter(a => a.status === 'Izin' || a.status === 'Sakit').length;
+            const percentage = total > 0 ? Math.round((hadir / total) * 100) : 0;
+            return { total, hadir, izin, percentage };
+        }
+
+        // ===== DATA & AUTH =====
+        const STUDENT_SELECT = '*, attendance(*), academic_notes(*), parent_guides(*), portfolio(*)';
+        const byDateDesc = (a, b) => String(b.date).localeCompare(String(a.date));
+        function normStudent(s) {
+            ['attendance', 'academic_notes', 'parent_guides', 'portfolio'].forEach(k => { s[k] = (s[k] || []).sort(byDateDesc); });
+            return s;
+        }
+
+        async function loadPublicTestimonials() {
+            if (!db) return;
+            const { data } = await db.from('testimonials').select('*').eq('status', 'Approved').order('created_at', { ascending: false });
+            S.testimonials = data || [];
+        }
+
+        async function loadStudentData() {
+            const { data, error } = await db.from('students').select(STUDENT_SELECT).eq('id', S.user.id).maybeSingle();
+            if (error) toast('Gagal memuat data: ' + error.message);
+            S.student = data ? normStudent(data) : null;
+            S.students = S.student ? [S.student] : [];
+            S.games = [];
+            if (S.student && S.student.payment_status === 'Sudah Bayar') {
+                const g = await db.from('games').select('*').order('grade');
+                S.games = g.data || [];
+            }
+            await loadPublicTestimonials();
+        }
+
+        async function loadAdminData() {
+            const [st, gm, ts] = await Promise.all([
+                db.from('students').select(STUDENT_SELECT).order('created_at', { ascending: false }),
+                db.from('games').select('*').order('grade'),
+                db.from('testimonials').select('*').order('created_at', { ascending: false })
+            ]);
+            if (st.error) toast('Gagal memuat data siswa: ' + st.error.message);
+            S.students = (st.data || []).map(normStudent);
+            S.games = gm.data || [];
+            S.testimonials = ts.data || [];
+        }
+
+        async function loadSession() {
+            if (!db) { S.loading = false; render(); return; }
+            const { data: { session } } = await db.auth.getSession();
+            if (!session) {
+                S.user = null; S.isAdmin = false; S.student = null; S.students = []; S.games = [];
+                await loadPublicTestimonials();
+            } else {
+                S.user = session.user;
+                const { data: adm } = await db.from('admins').select('user_id').eq('user_id', session.user.id).maybeSingle();
+                S.isAdmin = !!adm;
+                if (S.isAdmin) await loadAdminData(); else await loadStudentData();
+            }
+            S.loading = false;
+            render();
+        }
+
+        async function handleLogout() {
+            if (db) await db.auth.signOut();
+            S.user = null; S.isAdmin = false; S.student = null; S.students = []; S.games = [];
+            await loadPublicTestimonials();
+            toast('Berhasil keluar akun');
+            go('home');
+        }
+
+        // ===== NAV ACTIONS =====
+        function updateNavActions() {
+            const c = $('#nav-actions');
+            if (S.user) {
+                c.innerHTML = `
+                    <button onclick="go('portal')" class="btn btn-butter btn-sm">
+                        <i class="fa-solid fa-gauge-high"></i> <span class="hidden sm:inline">${S.isAdmin ? 'Dashboard Admin' : 'Portal Siswa'}</span>
+                    </button>
+                    <button onclick="handleLogout()" class="btn btn-ghost btn-sm">
+                        <i class="fa-solid fa-right-from-bracket"></i> <span class="hidden sm:inline">Keluar</span>
+                    </button>`;
+            } else {
+                c.innerHTML = `
+                    <button onclick="openLoginModal()" class="btn btn-ghost btn-sm">Masuk</button>
+                    <button onclick="scrollToId('daftar')" class="btn btn-pink btn-sm">Daftar</button>`;
+            }
+        }
+
+        // ===== VIEW: LANDING (PROMOSI) =====
+        function renderHome() {
+            const approvedTesti = S.testimonials.filter(t => t.status === 'Approved');
+            const tilt = ['-1.2deg', '1deg', '-.6deg'];
+
+            const groups = [
+                { name: 'Bunny Duo', seats: 2, label: '2 siswa', price: 'Rp13.000', save: 'Hemat Rp2.000 per sesi' },
+                { name: 'Bunny Trio', seats: 3, label: '3 siswa', price: 'Rp12.000', save: 'Hemat Rp3.000 per sesi' },
+                { name: 'Bunny Squad', seats: 5, label: '4–5 siswa', price: 'Rp10.000', save: 'Hemat Rp5.000 per sesi' }
+            ];
+
+            const why = [
+                ['fa-face-smile', 'Belajar menyenangkan', 'Metode ramah anak supaya betah belajar.', 'var(--butter)'],
+                ['fa-user-group', 'Privat dan kelompok kecil', 'Pilih privat atau kelompok 2–5 siswa.', 'var(--sky)'],
+                ['fa-comments', 'Konsultasi PR online', 'Ada PR yang sulit? Konsultasikan secara online.', 'var(--pink)'],
+                ['fa-gift', 'Trial gratis 1 kali', 'Berlaku untuk semua paket. Coba satu sesi tanpa biaya.', 'var(--mint)']
+            ];
+
+            return `
+                <!-- HERO -->
+                <section class="hero-bg relative overflow-hidden">
+                    <div class="max-w-7xl mx-auto px-4 pt-10 pb-28 md:pt-16 md:pb-32 grid md:grid-cols-12 gap-12 items-center relative z-10">
+                        <div class="md:col-span-7 space-y-6 text-center md:text-left">
+                            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-extrabold border-2 border-edge" style="background:var(--butter)">
+                                <i class="fa-solid fa-gift"></i> Free entry: trial gratis 1 kali
+                            </span>
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05]">
+                                Belajar Matematika &amp; Bahasa Inggris jadi menyenangkan.
+                            </h1>
+                            <p class="text-slate-600 text-base md:text-lg leading-relaxed max-w-xl mx-auto md:mx-0">
+                                Untuk siswa kelas 1–6 SD. Pilih belajar privat atau kelompok kecil, mulai dari <strong class="text-ink">Rp10.000 per sesi</strong>.
+                            </p>
+                            <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                                <button onclick="scrollToId('daftar')" class="btn btn-pink btn-lg">
+                                    <i class="fa-solid fa-pen-to-square"></i> Daftar trial gratis
+                                </button>
+                                <a href="https://wa.me/${ADMIN_WA}" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">
+                                    <i class="fa-brands fa-whatsapp text-green-600 text-lg"></i> Chat WhatsApp
+                                </a>
+                            </div>
+                            <div class="flex flex-wrap gap-2 justify-center md:justify-start text-sm font-extrabold">
+                                <span class="inline-flex items-center gap-2 bg-white border-2 border-edge rounded-full px-3 py-1"><i class="fa-regular fa-clock" style="color:var(--sky-deep)"></i> 1,5 jam per sesi</span>
+                                <span class="inline-flex items-center gap-2 bg-white border-2 border-edge rounded-full px-3 py-1"><i class="fa-solid fa-user-group" style="color:var(--pink-deep)"></i> Privat &amp; kelompok kecil</span>
+                            </div>
+                        </div>
+
+                        <!-- Poster card -->
+                        <div class="md:col-span-5 flex justify-center">
+                            <div class="relative w-full max-w-sm">
+                                <div class="burst bob" aria-hidden="true"><span>FREE<br>ENTRY</span><small>trial 1x</small></div>
+
+                                <div class="sticker p-6 pt-7 text-center relative z-10">
+                                    <img src="logo.png" alt="Logo Funny Bunny Course" class="w-44 h-44 mx-auto rounded-full object-contain -mt-1">
+                                    <p class="text-sm font-bold text-slate-500 mt-1">Learn, Leap, Shine!</p>
+
+                                    <div class="grid grid-cols-2 gap-3 mt-5">
+                                        <div class="rounded-2xl p-3 border-2 border-edge" style="background:var(--pink-soft)">
+                                            <div class="text-4xl">🧮</div>
+                                            <div class="font-bold mt-1 leading-tight">Matematika</div>
+                                        </div>
+                                        <div class="rounded-2xl p-3 border-2 border-edge" style="background:var(--sky-soft)">
+                                            <div class="text-4xl">📕</div>
+                                            <div class="font-bold mt-1 leading-tight">Bahasa Inggris</div>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm font-bold text-slate-600 mt-3">Untuk siswa kelas 1–6 SD</p>
+
+                                    <div class="mt-4 rounded-2xl bg-ink text-white py-3 px-4 flex items-center justify-between text-left">
+                                        <span class="text-xs font-bold text-slate-300 leading-tight">Harga mulai<br>per orang per sesi</span>
+                                        <span class="font-display text-3xl font-bold" style="color:var(--butter)">Rp10.000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KENAPA PILIH KAMI -->
+                <section id="kenapa" class="max-w-7xl mx-auto px-4 -mt-14 relative z-20 scroll-mt-24">
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        ${why.map(([ic, t, d, c]) => `
+                            <div class="sticker p-5 flex gap-4 items-start" style="box-shadow:4px 4px 0 var(--edge)">
+                                <div class="w-12 h-12 rounded-full border-2 border-edge flex items-center justify-center shrink-0 text-lg" style="background:${c}"><i class="fa-solid ${ic}"></i></div>
+                                <div>
+                                    <h3 class="font-bold text-lg leading-tight">${t}</h3>
+                                    <p class="text-sm text-slate-600 mt-1 leading-snug">${d}</p>
+                                </div>
+                            </div>`).join('')}
+                    </div>
+                </section>
+
+                <!-- PROGRAM -->
+                <section id="program" class="max-w-7xl mx-auto px-4 py-20 scroll-mt-24">
+                    <div class="text-center max-w-2xl mx-auto mb-10">
+                        <h2 class="text-3xl md:text-4xl font-bold">Program belajar</h2>
+                        <p class="text-slate-600 mt-2">Untuk siswa kelas 1–6 SD. Materi mengikuti kurikulum sekolah dan disesuaikan dengan kebutuhan anak.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                        <div class="card card-hover p-7 text-center" style="background:var(--pink-soft);border-color:#FFD3DC">
+                            <div class="w-20 h-20 mx-auto rounded-3xl bg-white border-2 border-edge flex items-center justify-center text-5xl" style="box-shadow:4px 4px 0 var(--edge)">🧮</div>
+                            <h3 class="text-2xl font-bold mt-4">Matematika</h3>
+                            <p class="text-slate-700 mt-2 leading-relaxed">Konsep berhitung, nalar, bentuk geometri, sampai soal cerita, dijelaskan dengan cara yang mudah dibayangkan.</p>
+                        </div>
+                        <div class="card card-hover p-7 text-center" style="background:var(--sky-soft);border-color:#C5DCEE">
+                            <div class="w-20 h-20 mx-auto rounded-3xl bg-white border-2 border-edge flex items-center justify-center text-5xl" style="box-shadow:4px 4px 0 var(--edge)">📕</div>
+                            <h3 class="text-2xl font-bold mt-4">Bahasa Inggris</h3>
+                            <p class="text-slate-700 mt-2 leading-relaxed">Kosakata (<em>vocabulary</em>), tata bahasa dasar (<em>grammar</em>), membaca (<em>reading</em>), dan percakapan sederhana agar anak berani bicara.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- HARGA & KELAS -->
+                <section id="harga" class="bg-white py-20 border-y-2 border-edge scroll-mt-24">
+                    <div class="max-w-6xl mx-auto px-4">
+                        <div class="text-center max-w-2xl mx-auto mb-12">
+                            <h2 class="text-3xl md:text-4xl font-bold">Harga &amp; kelas</h2>
+                            <p class="text-slate-600 mt-2">Durasi belajar 1,5 jam per sesi.</p>
+                            <span class="inline-flex items-center gap-2 mt-4 px-4 py-1.5 rounded-full text-sm font-extrabold border-2 border-edge" style="background:var(--butter)"><i class="fa-solid fa-gift"></i> FREE ENTRY: trial gratis 1 kali untuk semua paket</span>
+                        </div>
+
+                        <div class="grid lg:grid-cols-5 gap-6 items-stretch">
+                            <!-- Private -->
+                            <div class="lg:col-span-2 price-card hot text-center justify-center">
+                                <h3 class="text-3xl font-bold mt-2">Private</h3>
+                                <div class="seats"><i></i></div>
+                                <div class="price" style="font-size:3.2rem">Rp15.000</div>
+                                <p class="text-slate-600 mt-1 mb-3">1 siswa, per sesi</p>
+                                <div class="mb-5"><span class="chip chip-ok"><i class="fa-solid fa-gift"></i> Trial gratis 1x</span></div>
+                                <button onclick="choosePackage('Private')" class="btn btn-pink btn-lg btn-block">Pilih Private</button>
+                            </div>
+
+                            <!-- Custom group -->
+                            <div class="lg:col-span-3 price-card" style="padding:1.5rem">
+                                <div class="flex items-baseline justify-between gap-3 mb-2">
+                                    <h3 class="text-2xl font-bold">Kelas kelompok (custom)</h3>
+                                    <span class="text-sm font-bold text-slate-500">harga per orang</span>
+                                </div>
+                                <div class="divide-y-2" style="border-color:var(--line)">
+                                    ${groups.map(g => `
+                                        <div class="py-4 flex flex-wrap items-center justify-between gap-3" style="border-color:var(--line)">
+                                            <div class="min-w-[9rem]">
+                                                <div class="font-display text-xl font-bold">${g.name}</div>
+                                                <div class="flex items-center gap-2 mt-1">
+                                                    <span class="flex gap-1">${'<i class="block w-3.5 h-3.5 rounded-full border-2 border-edge" style="background:var(--sky)"></i>'.repeat(g.seats)}</span>
+                                                    <span class="text-sm font-bold" style="color:var(--pink-deep)">${g.label}</span>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="price" style="font-size:1.8rem">${g.price}<span class="text-sm font-bold text-slate-500" style="font-family:Nunito"> /orang</span></div>
+                                                <div class="flex items-center justify-end gap-2 flex-wrap mt-1"><span class="chip chip-ok"><i class="fa-solid fa-gift"></i> Trial gratis 1x</span><span class="text-xs font-extrabold" style="color:var(--mint-deep)">${g.save}</span></div>
+                                            </div>
+                                            <button onclick="choosePackage('${g.name}')" class="btn btn-ghost btn-sm w-full sm:w-auto">Pilih</button>
+                                        </div>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FORM DAFTAR -->
+                <section id="daftar" class="max-w-3xl mx-auto px-4 py-20 scroll-mt-24">
+                    <div id="register-wrap" class="sticker p-6 sm:p-9">
+                        <div class="mb-7">
+                            <h2 class="text-3xl font-bold">Daftar trial gratis</h2>
+                            <p class="text-slate-600 mt-1">Trial gratis 1 sesi berlaku untuk semua paket. Isi data anak Anda, lalu lanjut chat WhatsApp admin untuk menentukan jadwal.</p>
+                        </div>
+
+                        <form id="register-form" onsubmit="handleRegisterSubmit(event)" class="space-y-5">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div><label class="lbl">Nama anak</label><input name="child_name" required class="inp" placeholder="Contoh: Budi Santoso"></div>
+                                <div><label class="lbl">Nama orang tua</label><input name="parent_name" required class="inp" placeholder="Contoh: Ibu Ani"></div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div><label class="lbl">Tempat lahir</label><input name="pob" required class="inp" placeholder="Contoh: Sumedang"></div>
+                                <div><label class="lbl">Tanggal lahir</label><input name="dob" type="date" required class="inp"></div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div><label class="lbl">Asal sekolah</label><input name="school_origin" required class="inp" placeholder="SDN Sumedang 1"></div>
+                                <div><label class="lbl">Kelas SD</label>
+                                    <select name="grade" class="inp">${[1,2,3,4,5,6].map(g => `<option value="${g}">Kelas ${g} SD</option>`).join('')}</select>
+                                </div>
+                            </div>
+
+                            <div><label class="lbl">Alamat rumah lengkap</label><textarea name="address" required rows="2" class="inp" placeholder="Alamat lengkap rumah"></textarea></div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div><label class="lbl">No. WhatsApp aktif</label><input name="whatsapp" required inputmode="tel" class="inp" placeholder="081234567890"></div>
+                                <div><label class="lbl">Paket belajar</label>
+                                    <select name="package" id="reg-package" class="inp">
+                                        <option value="Private">Private (Rp15.000/sesi)</option>
+                                        <option value="Bunny Duo">Bunny Duo (Rp13.000/orang)</option>
+                                        <option value="Bunny Trio">Bunny Trio (Rp12.000/orang)</option>
+                                        <option value="Bunny Squad">Bunny Squad (Rp10.000/orang)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div><label class="lbl">Kebutuhan &amp; kendala belajar anak</label><textarea name="needs_challenges" rows="2" class="inp" placeholder="Contoh: Belum lancar perkalian 6-9, kurang percaya diri membaca Bahasa Inggris"></textarea></div>
+
+                            <div class="rounded-2xl p-4 border-2 border-dashed" style="border-color:var(--sky);background:var(--sky-soft)">
+                                <p class="text-sm font-extrabold mb-3"><i class="fa-solid fa-key mr-1"></i> Akun untuk masuk ke portal</p>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div><label class="lbl">Username</label><input name="username" required autocomplete="username" pattern="[A-Za-z0-9._\-]{3,30}" title="3-30 karakter: huruf, angka, titik, garis bawah, atau strip" class="inp" placeholder="contoh: budi.santoso"></div>
+                                    <div><label class="lbl">Password</label><input name="password" type="password" required minlength="6" autocomplete="new-password" class="inp" placeholder="Minimal 6 karakter"></div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-pink btn-lg btn-block">
+                                <i class="fa-solid fa-paper-plane"></i> Kirim pendaftaran
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- ALAMAT & KONTAK -->
+                <section id="kontak" class="py-16 border-y-2 border-edge scroll-mt-24" style="background:var(--sky-soft)">
+                    <div class="max-w-7xl mx-auto px-4">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">Alamat &amp; kontak</h2>
+                        <div class="grid md:grid-cols-2 gap-5 mb-8">
+                            <div class="card flex gap-4 items-start">
+                                <div class="w-11 h-11 rounded-full flex items-center justify-center shrink-0 border-2 border-edge" style="background:var(--sky)"><i class="fa-solid fa-house"></i></div>
+                                <div><h3 class="font-bold text-lg">Lokasi Kojengkang</h3><p class="text-slate-600 text-[15px]">Dusun Kojengkang No. 24, RT 01/RW 10, Desa Licin, Kecamatan Cimalaka, Kabupaten Sumedang, Jawa Barat 45353.</p></div>
+                            </div>
+                            <div class="card flex gap-4 items-start">
+                                <div class="w-11 h-11 rounded-full flex items-center justify-center shrink-0 border-2 border-edge" style="background:var(--pink)"><i class="fa-solid fa-house"></i></div>
+                                <div><h3 class="font-bold text-lg">Lokasi Anggrek</h3><p class="text-slate-600 text-[15px]">Lingkungan Anggrek, RT 003/RW 002, Gang Al-Huda 1 No. 1, Kotakaler, Kecamatan Sumedang Utara, Kabupaten Sumedang, Jawa Barat 45322.</p></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <a href="https://wa.me/${ADMIN_WA}" target="_blank" rel="noopener" class="btn btn-pink"><i class="fa-brands fa-whatsapp text-lg"></i> 0812-6963-9158</a>
+                            <a href="https://www.instagram.com/funnybunny.course" target="_blank" rel="noopener" class="btn btn-ghost"><i class="fa-brands fa-instagram text-lg" style="color:var(--pink-deep)"></i> funnybunny.course</a>
+                            <a href="https://www.tiktok.com/@funnybunny.course" target="_blank" rel="noopener" class="btn btn-ghost"><i class="fa-brands fa-tiktok text-lg"></i> funnybunny.course</a>
+                        </div>
+                    </div>
+                </section>
+
+                ${approvedTesti.length ? `
+                <!-- TESTIMONI -->
+                <section id="testimoni" class="max-w-7xl mx-auto px-4 py-20 scroll-mt-24">
+                    <div class="text-center max-w-2xl mx-auto mb-10">
+                        <h2 class="text-3xl md:text-4xl font-bold">Kata orang tua siswa</h2>
+                        <p class="text-slate-600 mt-2">Ulasan dari orang tua yang mempercayakan belajar anaknya di Funny Bunny Course.</p>
+                    </div>
+
+                    ${approvedTesti.length ? `
+                        <div class="grid md:grid-cols-3 gap-6">
+                            ${approvedTesti.map((t, i) => `
+                                <figure class="sticker p-5 flex flex-col justify-between" style="transform:rotate(${tilt[i % 3]});box-shadow:4px 4px 0 var(--edge)">
+                                    <div>
+                                        <div class="text-lg mb-2" style="color:#F5A623" aria-label="${t.rating} dari 5 bintang">${'★'.repeat(t.rating)}${'☆'.repeat(5 - t.rating)}</div>
+                                        <blockquote class="text-[15px] leading-relaxed font-semibold">“${esc(t.review)}”</blockquote>
+                                    </div>
+                                    <figcaption class="mt-4 pt-3 border-t-2 border-dashed text-sm font-extrabold" style="border-color:var(--line);color:var(--sky-deep)">
+                                        ${esc(t.parent_name)}, orang tua ${esc(t.child_name)}
+                                    </figcaption>
+                                </figure>
+                            `).join('')}
+                        </div>
+                    ` : `<p class="text-center text-slate-500">Belum ada testimoni yang disetujui.</p>`}
+                </section>
+
+                ` : ''}
+
+                <!-- Tombol WhatsApp melayang -->
+                <a href="https://wa.me/${ADMIN_WA}" target="_blank" rel="noopener" aria-label="Chat WhatsApp admin" class="btn btn-pink fixed bottom-5 right-5 z-30" style="padding:.8rem 1.1rem">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> <span class="hidden sm:inline">Chat admin</span>
+                </a>
+            `;
+        }
+
+        function choosePackage(pkg) {
+            scrollToId('daftar');
+            setTimeout(() => { const sel = document.getElementById('reg-package'); if (sel) sel.value = pkg; }, 150);
+        }
+
+        async function handleRegisterSubmit(e) {
+            e.preventDefault();
+            if (!db) { toast('Database belum dihubungkan. Silakan hubungi admin.'); return; }
+            const form = e.target;
+            const v = fd(form);
+            v.username = v.username.trim().toLowerCase();
+            if (!/^[a-z0-9._-]{3,30}$/.test(v.username)) { toast('Username 3-30 karakter: huruf, angka, titik, garis bawah, atau strip.'); return; }
+            const btn = form.querySelector('button[type=submit]');
+            btn.disabled = true;
+
+            const { data, error } = await db.auth.signUp({
+                email: toEmail(v.username),
+                password: v.password,
+                options: {
+                    data: {
+                        child_name: v.child_name.trim(), parent_name: v.parent_name.trim(),
+                        pob: v.pob.trim(), dob: v.dob, school_origin: v.school_origin.trim(),
+                        grade: v.grade, address: v.address.trim(), whatsapp: v.whatsapp.trim(),
+                        package: v.package, needs_challenges: (v.needs_challenges || '').trim()
+                    }
+                }
+            });
+            btn.disabled = false;
+
+            if (error) {
+                const m = /already registered/i.test(error.message) ? 'Username sudah dipakai. Coba username lain.'
+                        : /email/i.test(error.message) && /invalid/i.test(error.message) ? 'Pengaturan login belum benar. Hubungi admin.'
+                        : /password/i.test(error.message) ? 'Password terlalu pendek (minimal 6 karakter).'
+                        : 'Pendaftaran gagal: ' + error.message;
+                toast(m);
+                return;
+            }
+
+            const waText = encodeURIComponent(`Halo Admin Funny Bunny Course, saya ${v.parent_name}, mendaftarkan anak ${v.child_name} (Kelas ${v.grade} SD).\n\n• Asal Sekolah: ${v.school_origin}\n• TTL: ${v.pob}, ${v.dob}\n• Paket: ${v.package}\n• No WA: ${v.whatsapp}\n• Kendala: ${v.needs_challenges || '-'}\n\nMohon konfirmasi jadwal trial gratis.`);
+            const needConfirm = !data.session;
+            $('#register-wrap').innerHTML = `
+                <div class="text-center py-6">
+                    <div class="text-5xl mb-3">🎉</div>
+                    <h2 class="text-3xl font-bold mb-2">Pendaftaran terkirim!</h2>
+                    <p class="text-slate-600 max-w-md mx-auto mb-6">Langkah terakhir: chat admin lewat WhatsApp untuk menentukan jadwal trial gratis ${esc(v.child_name)}.</p>
+                    <a href="https://wa.me/${ADMIN_WA}?text=${waText}" target="_blank" rel="noopener" class="btn btn-pink btn-lg"><i class="fa-brands fa-whatsapp text-lg"></i> Chat WA admin</a>
+                    <p class="text-sm text-slate-500 mt-5 max-w-md mx-auto">${needConfirm ? 'Akun sudah dibuat. Masuk ke portal dengan username dan password tadi.' : 'Anda sudah masuk. Buka Portal Siswa dari menu di atas.'}</p>
+                </div>`;
+            if (!needConfirm) { await loadSession(); }
+        }
+
+        // ===== LOGIN MODAL =====
+        function openLoginModal() {
+            if (document.getElementById('modal-login')) return;
+            const modal = document.createElement('div');
+            modal.id = 'modal-login';
+            modal.className = 'fixed inset-0 bg-ink/70 backdrop-blur-sm z-50 flex items-center justify-center p-4';
+            modal.onclick = () => modal.remove();
+            modal.innerHTML = `
+                <div class="modal-card max-w-md w-full relative p-7" onclick="event.stopPropagation()">
+                    <button onclick="document.getElementById('modal-login').remove()" class="modal-close" aria-label="Tutup">✕</button>
+                    <div class="text-center mb-6">
+                        <img src="logo.png" alt="Logo" class="w-20 h-20 mx-auto rounded-full object-contain mb-2">
+                        <h3 class="text-2xl font-bold">Masuk ke portal</h3>
+                        <p class="text-sm text-slate-500">Pantau perkembangan belajar anak.</p>
+                    </div>
+
+                    <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                        <div><label class="lbl">Username</label><input name="username" required autocomplete="username" autocapitalize="none" class="inp" placeholder="Username"></div>
+                        <div><label class="lbl">Password</label><input name="password" type="password" required autocomplete="current-password" class="inp" placeholder="Password"></div>
+                        <button type="submit" class="btn btn-blue btn-block">Masuk</button>
+                    </form>
+
+                    <p class="mt-5 text-center text-sm text-slate-500">Lupa password? <a class="font-extrabold underline" style="color:var(--sky-deep)" href="https://wa.me/${ADMIN_WA}?text=${encodeURIComponent('Halo Admin, saya lupa password akun Funny Bunny Course.')}" target="_blank" rel="noopener">Hubungi admin</a></p>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            const first = modal.querySelector('input'); if (first) first.focus();
+        }
+
+        async function handleLoginSubmit(e) {
+            e.preventDefault();
+            if (!db) { toast('Database belum dihubungkan. Silakan hubungi admin.'); return; }
+            const v = fd(e.target);
+            const btn = e.target.querySelector('button[type=submit]');
+            btn.disabled = true;
+            const { error } = await db.auth.signInWithPassword({ email: toEmail(v.username), password: v.password });
+            btn.disabled = false;
+            if (error) {
+                toast(/confirm/i.test(error.message) ? 'Akun belum aktif. Hubungi admin.' : 'Username atau password salah.');
+                return;
+            }
+            const modal = document.getElementById('modal-login');
+            if (modal) modal.remove();
+            S.loading = true;
+            S.page = 'portal'; S.studentTab = 'absensi'; S.adminTab = 'students';
+            render();
+            await loadSession();
+            window.scrollTo(0, 0);
+            toast('Berhasil masuk');
+        }
+
+        // ===== VIEW: PORTAL SISWA =====
+        function renderStudentPortal() {
+            const s = S.student;
+            if (!s) return `<div class="max-w-md mx-auto p-8 card my-12 text-center">Data siswa untuk akun ini belum ditemukan. Hubungi admin lewat WhatsApp.</div>`;
+            const stats = calcAttendanceStats(s.attendance);
+            const paid = s.payment_status === 'Sudah Bayar';
+            const tabs = [
+                ['absensi', 'fa-calendar-check', 'Absensi'],
+                ['notes', 'fa-note-sticky', 'Catatan & Parent Guide'],
+                ['portfolio', 'fa-images', 'Album LKPD'],
+                ['games', 'fa-gamepad', 'Games'],
+                ['testi', 'fa-pen-nib', 'Tulis testimoni']
+            ];
+
+            return `
+                <div class="max-w-7xl mx-auto px-4 py-8">
+                    <div class="sticker p-5 sm:p-6 mb-6 flex flex-wrap items-center justify-between gap-4" style="background:linear-gradient(110deg,var(--sky-soft),#fff 60%,var(--pink-soft))">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-full bg-white border-2 border-edge overflow-hidden p-1.5 shrink-0">
+                                <img src="logo.png" alt="Avatar" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3069/3069172.png';">
+                            </div>
+                            <div>
+                                <h2 class="text-2xl sm:text-3xl font-bold leading-tight">Halo, ${esc(s.child_name)}!</h2>
+                                <p class="text-sm text-slate-600 mt-0.5">Kelas ${s.grade} SD &bull; ${esc(s.school_origin)} &bull; Paket <strong>${esc(s.package)}</strong></p>
+                            </div>
+                        </div>
+                        <span class="chip ${paid ? 'chip-ok' : 'chip-warn'} text-sm px-4 py-1.5 border-2 border-edge">
+                            <i class="fa-solid ${paid ? 'fa-circle-check' : 'fa-hourglass-half'}"></i>
+                            ${paid ? 'Lunas, akun aktif' : 'Menunggu verifikasi pembayaran'}
+                        </span>
+                    </div>
+
+                    <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
+                        ${tabs.map(([k, ic, label]) => `
+                            <button onclick="S.studentTab='${k}'; render()" class="tab ${S.studentTab === k ? 'active' : ''}"><i class="fa-solid ${ic}"></i> ${label}</button>
+                        `).join('')}
+                    </div>
+
+                    ${S.studentTab === 'absensi' ? renderStudentAttendance(s, stats) : ''}
+                    ${S.studentTab === 'notes' ? renderStudentNotes(s) : ''}
+                    ${S.studentTab === 'portfolio' ? renderStudentPortfolio(s) : ''}
+                    ${S.studentTab === 'games' ? renderStudentGames(s) : ''}
+                    ${S.studentTab === 'testi' ? renderStudentTesti(s) : ''}
+                </div>
+            `;
+        }
+
+        function renderStudentAttendance(s, stats) {
+            const statCards = [
+                ['Total pertemuan', stats.total + ' sesi', 'var(--sky)'],
+                ['Hadir', stats.hadir + ' sesi', '#6DD3A5'],
+                ['Izin / sakit', stats.izin + ' sesi', 'var(--butter)'],
+                ['Kehadiran', stats.percentage + '%', 'var(--pink)']
+            ];
+            return `
+                <div class="space-y-6">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        ${statCards.map(([l, v, c]) => `
+                            <div class="card overflow-hidden">
+                                <div class="stat-top" style="background:${c}"></div>
+                                <span class="text-sm text-slate-500 font-bold block">${l}</span>
+                                <span class="font-display text-3xl font-bold">${v}</span>
+                            </div>`).join('')}
+                    </div>
+
+                    <div class="card p-0 overflow-hidden">
+                        <div class="px-5 pt-5 pb-3">
+                            <h3 class="font-bold text-lg flex items-center gap-2"><i class="fa-solid fa-calendar-check" style="color:var(--sky-deep)"></i> Riwayat kehadiran</h3>
+                        </div>
+                        ${s.attendance && s.attendance.length ? `
+                            <div class="overflow-x-auto">
+                                <table class="tbl">
+                                    <thead><tr><th>Hari, tanggal</th><th>Status</th><th>Materi sesi</th><th>Catatan tutor</th></tr></thead>
+                                    <tbody>
+                                        ${s.attendance.map(a => `
+                                            <tr>
+                                                <td class="font-bold whitespace-nowrap">${esc(a.day)}, ${esc(fmtDate(a.date))}</td>
+                                                <td><span class="chip ${statusChip(a.status)}">${esc(a.status)}</span></td>
+                                                <td class="font-bold" style="color:var(--sky-deep)">${esc(a.topic || '-')}</td>
+                                                <td class="text-slate-600 min-w-[220px]">${esc(a.notes || '-')}</td>
+                                            </tr>`).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        ` : `<p class="text-center text-slate-500 text-sm py-10">Belum ada riwayat absensi. Catatan akan muncul setelah sesi pertama.</p>`}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderStudentNotes(s) {
+            return `
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card space-y-4">
+                        <h3 class="font-bold text-lg border-b-2 pb-2 flex items-center gap-2" style="border-color:var(--line)">
+                            <i class="fa-solid fa-file-signature" style="color:var(--sky-deep)"></i> Catatan akademik tutor
+                        </h3>
+                        ${s.academic_notes && s.academic_notes.length ? `
+                            <div class="space-y-3">
+                                ${s.academic_notes.map(n => `
+                                    <div class="p-4 rounded-2xl text-sm space-y-1.5" style="background:var(--sky-soft)">
+                                        <div class="flex justify-between items-center gap-2 text-xs font-bold text-slate-500">
+                                            <span>${esc(fmtDate(n.date))}</span>
+                                            <span class="chip chip-info" style="background:#fff">${esc(n.topic)}</span>
+                                        </div>
+                                        <p class="leading-relaxed font-semibold">${esc(n.content)}</p>
+                                    </div>`).join('')}
+                            </div>
+                        ` : `<p class="text-center text-slate-500 text-sm py-8">Belum ada catatan dari tutor.</p>`}
+                    </div>
+
+                    <div class="card space-y-4">
+                        <h3 class="font-bold text-lg border-b-2 pb-2 flex items-center gap-2" style="border-color:var(--line)">
+                            <i class="fa-solid fa-lightbulb" style="color:#E0A100"></i> Parent Guide untuk di rumah
+                        </h3>
+                        ${s.parent_guides && s.parent_guides.length ? `
+                            <div class="space-y-3">
+                                ${s.parent_guides.map(g => `
+                                    <div class="p-4 rounded-2xl text-sm space-y-1" style="background:var(--butter-soft);border:1.5px solid #F2E3A0">
+                                        <div class="text-xs font-bold text-slate-500">${esc(fmtDate(g.date))}</div>
+                                        <h4 class="font-bold text-base">${esc(g.title)}</h4>
+                                        <p class="leading-relaxed font-semibold text-slate-700">${esc(g.content)}</p>
+                                    </div>`).join('')}
+                            </div>
+                        ` : `<p class="text-center text-slate-500 text-sm py-8">Belum ada panduan untuk orang tua.</p>`}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderStudentPortfolio(s) {
+            const list = s.portfolio || [];
+            const filtered = list.filter(p => S.portfolioFilter === 'all' || p.category === S.portfolioFilter);
+            const filters = [['all', 'Semua'], ['LKPD', 'LKPD'], ['Hasil Karya', 'Hasil Karya'], ['Aktivitas Kelas', 'Aktivitas Kelas']];
+
+            return `
+                <div class="space-y-6">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-sm font-extrabold mr-1">Kategori:</span>
+                        ${filters.map(([k, l]) => `<button onclick="S.portfolioFilter='${k}'; render()" class="filter-pill ${S.portfolioFilter === k ? 'on' : ''}">${l}</button>`).join('')}
+                    </div>
+
+                    ${filtered.length ? `
+                        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+                            ${filtered.map(p => `
+                                <button onclick="openLightboxById('${p.id}')" class="card card-hover p-3 text-left group">
+                                    <div class="overflow-hidden rounded-xl h-44 bg-slate-100 mb-3 relative">
+                                        <img src="${esc(safeUrl(p.image_url))}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="${esc(p.title)}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';">
+                                        <span class="chip chip-pink absolute top-2 left-2" style="background:#fff">${esc(p.category)}</span>
+                                    </div>
+                                    <h4 class="font-bold text-[15px] truncate px-1">${esc(p.title)}</h4>
+                                    <p class="text-xs text-slate-500 font-semibold px-1">${esc(fmtDate(p.date))}</p>
+                                </button>`).join('')}
+                        </div>
+                    ` : `<div class="card text-center py-12 text-slate-500 text-sm">Belum ada foto untuk kategori ini.</div>`}
+                </div>
+            `;
+        }
+
+        function openLightboxById(pid) {
+            const p = (S.student?.portfolio || []).find(x => x.id === pid);
+            if (!p) return;
+            $('#lightbox-img').src = p.image_url;
+            $('#lightbox-img').alt = p.title;
+            $('#lightbox-title').textContent = p.title;
+            $('#lightbox-category').textContent = p.category;
+            $('#lightbox-date').textContent = fmtDate(p.date);
+            $('#lightbox-desc').textContent = p.description || '';
+            openModal('modal-lightbox');
+        }
+
+        function renderStudentGames(s) {
+            if (s.payment_status !== 'Sudah Bayar') {
+                return `
+                    <div class="sticker text-center py-12 px-6 max-w-2xl mx-auto" style="background:var(--butter-soft)">
+                        <div class="text-5xl mb-3">🔒</div>
+                        <h3 class="text-2xl font-bold mb-2">Games masih terkunci</h3>
+                        <p class="text-slate-700 max-w-md mx-auto mb-6 leading-relaxed">
+                            Games terbuka otomatis setelah admin memverifikasi pembayaran. Konfirmasi lewat WhatsApp supaya lebih cepat.
+                        </p>
+                        <a href="https://wa.me/${ADMIN_WA}?text=${encodeURIComponent('Halo Admin, saya orang tua dari ' + s.child_name + ' ingin konfirmasi pembayaran agar modul Games terbuka.')}" target="_blank" rel="noopener" class="btn btn-pink">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Konfirmasi pembayaran
+                        </a>
+                    </div>
+                `;
+            }
+
+            const filteredGames = S.games.filter(g => S.gameGradeFilter === 'all' || g.grade === parseInt(S.gameGradeFilter));
+
+            return `
+                <div class="space-y-6">
+                    <div class="flex flex-wrap items-center gap-3">
+                        <label for="game-filter" class="text-sm font-extrabold">Tampilkan game untuk:</label>
+                        <select id="game-filter" onchange="S.gameGradeFilter=this.value; render()" class="inp" style="width:auto">
+                            <option value="all" ${S.gameGradeFilter === 'all' ? 'selected' : ''}>Semua kelas</option>
+                            ${[1,2,3,4,5,6].map(g => `<option value="${g}" ${S.gameGradeFilter == g ? 'selected' : ''}>Kelas ${g} SD</option>`).join('')}
+                        </select>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+                        ${filteredGames.length ? filteredGames.map(g => `
+                            <div class="card card-hover flex flex-col justify-between">
+                                <div>
+                                    <div class="flex gap-1.5 mb-3 flex-wrap">
+                                        <span class="chip chip-pink">Kelas ${g.grade}</span>
+                                        <span class="chip chip-info">${esc(g.subject)}</span>
+                                    </div>
+                                    <h4 class="font-bold text-lg leading-snug">${esc(g.title)}</h4>
+                                </div>
+                                <a href="${esc(safeUrl(g.url))}" target="_blank" rel="noopener" class="btn btn-blue btn-sm mt-5" style="padding:.55rem 1rem;font-size:.85rem">
+                                    <i class="fa-solid fa-gamepad"></i> Mainkan
+                                </a>
+                            </div>`).join('') : `
+                            <div class="col-span-full card text-center py-10 text-slate-500 text-sm">Belum ada game untuk kelas ini.</div>`}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderStudentTesti(s) {
+            return `
+                <div class="max-w-xl mx-auto sticker p-6 sm:p-8">
+                    <h3 class="text-2xl font-bold mb-1">Tulis testimoni</h3>
+                    <p class="text-sm text-slate-600 mb-5">Cerita Anda membantu kami meningkatkan layanan dan membantu orang tua lain memilih.</p>
+
+                    <form onsubmit="handleTestiSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="lbl">Penilaian</label>
+                            <select name="rating" class="inp">
+                                <option value="5">5 bintang, sangat memuaskan</option>
+                                <option value="4">4 bintang, bagus</option>
+                                <option value="3">3 bintang, cukup</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="lbl">Ulasan</label>
+                            <textarea name="review" required rows="4" class="inp" placeholder="Bagaimana pengalaman anak Anda belajar di Funny Bunny Course?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-pink btn-block">Kirim testimoni</button>
+                    </form>
+                </div>
+            `;
+        }
+
+        async function handleTestiSubmit(e) {
+            e.preventDefault();
+            const v = fd(e.target);
+            const { error } = await db.from('testimonials').insert({
+                student_id: S.student.id,
+                parent_name: S.student.parent_name,
+                child_name: S.student.child_name,
+                rating: parseInt(v.rating),
+                review: v.review.trim(),
+                status: 'Pending'
+            });
+            if (error) { toast('Gagal mengirim testimoni: ' + error.message); return; }
+            toast('Terima kasih! Testimoni terkirim dan menunggu persetujuan admin.');
+            S.studentTab = 'absensi';
+            render();
+        }
+
+        // ===== VIEW: ADMIN =====
+        function renderAdminPortal() {
+            const pending = S.testimonials.filter(t => t.status === 'Pending').length;
+            const tabs = [
+                ['students', 'fa-users', 'Siswa & progress', ''],
+                ['games', 'fa-gamepad', 'Games kelas 1–6', ''],
+                ['testi', 'fa-star', 'Moderasi testimoni', pending ? `<span class="chip chip-pink" style="padding:0 .5rem">${pending}</span>` : '']
+            ];
+            return `
+                <div class="max-w-7xl mx-auto px-4 py-8">
+                    <div class="bg-ink text-white p-6 rounded-3xl mb-6 flex flex-wrap justify-between items-center gap-3" style="box-shadow:5px 5px 0 var(--pink)">
+                        <div>
+                            <h2 class="text-3xl font-bold">Dashboard admin</h2>
+                            <p class="text-sm text-slate-300 mt-1">Kelola pendaftaran, absensi, catatan tutor, LKPD, games, dan testimoni.</p>
+                        </div>
+                        <div class="flex gap-3 text-center">
+                            <div class="rounded-2xl px-4 py-2" style="background:rgba(255,255,255,.1)"><div class="font-display text-2xl font-bold">${S.students.length}</div><div class="text-xs text-slate-300">Siswa</div></div>
+                            <div class="rounded-2xl px-4 py-2" style="background:rgba(255,255,255,.1)"><div class="font-display text-2xl font-bold">${S.students.filter(x => x.payment_status !== 'Sudah Bayar').length}</div><div class="text-xs text-slate-300">Belum lunas</div></div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
+                        ${tabs.map(([k, ic, l, badge]) => `
+                            <button onclick="S.adminTab='${k}'; render()" class="tab ${S.adminTab === k ? 'active' : ''}"><i class="fa-solid ${ic}"></i> ${l} ${badge}</button>
+                        `).join('')}
+                    </div>
+
+                    ${S.adminTab === 'students' ? renderAdminStudents() : ''}
+                    ${S.adminTab === 'games' ? renderAdminGames() : ''}
+                    ${S.adminTab === 'testi' ? renderAdminTesti() : ''}
+                </div>
+            `;
+        }
+
+        function onStudentSearch(el) {
+            S.studentSearchQuery = el.value;
+            render();
+            const i = document.getElementById('q-student');
+            if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); }
+        }
+
+        function renderAdminStudents() {
+            const q = S.studentSearchQuery.toLowerCase();
+            const list = S.students.filter(s => {
+                const matchStatus = S.studentStatusFilter === 'all' || s.payment_status === S.studentStatusFilter;
+                const matchQuery = !q || s.child_name.toLowerCase().includes(q) || s.parent_name.toLowerCase().includes(q);
+                return matchStatus && matchQuery;
+            });
+
+            return `
+                <div class="space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-3">
+                        <div class="relative w-full sm:w-72">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                            <input id="q-student" oninput="onStudentSearch(this)" value="${esc(S.studentSearchQuery)}" placeholder="Cari nama siswa atau orang tua" class="inp" style="padding-left:2.3rem">
+                        </div>
+                        <div class="flex gap-2 items-center">
+                            <label for="f-status" class="text-sm font-extrabold">Status bayar</label>
+                            <select id="f-status" onchange="S.studentStatusFilter=this.value; render()" class="inp" style="width:auto">
+                                <option value="all" ${S.studentStatusFilter === 'all' ? 'selected' : ''}>Semua</option>
+                                <option value="Sudah Bayar" ${S.studentStatusFilter === 'Sudah Bayar' ? 'selected' : ''}>Sudah bayar</option>
+                                <option value="Pending" ${S.studentStatusFilter === 'Pending' ? 'selected' : ''}>Pending</option>
+                                <option value="Belum Bayar" ${S.studentStatusFilter === 'Belum Bayar' ? 'selected' : ''}>Belum bayar</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="card p-0 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="tbl">
+                                <thead>
+                                    <tr><th>Nama anak</th><th>Kelas &amp; sekolah</th><th>Paket</th><th>No. WA</th><th>Status bayar</th><th class="text-center">Aksi</th></tr>
+                                </thead>
+                                <tbody>
+                                    ${list.length ? list.map(s => `
+                                        <tr>
+                                            <td class="font-bold">${esc(s.child_name)}<span class="block text-xs text-slate-500 font-semibold">Ortu: ${esc(s.parent_name)}</span></td>
+                                            <td class="font-semibold">Kelas ${s.grade} SD<span class="block text-xs text-slate-500">${esc(s.school_origin)}</span></td>
+                                            <td><span class="chip chip-info">${esc(s.package)}</span></td>
+                                            <td class="whitespace-nowrap">${esc(s.whatsapp)}</td>
+                                            <td><span class="chip ${payChip(s.payment_status)}">${esc(s.payment_status)}</span></td>
+                                            <td class="text-center whitespace-nowrap">
+                                                <button onclick="openStudentDetailModal('${s.id}')" class="btn btn-ghost btn-sm">Biodata</button>
+                                                <button onclick="openAdminManageModal('${s.id}')" class="btn btn-pink btn-sm">Kelola progress</button>
+                                            </td>
+                                        </tr>`).join('') : `
+                                        <tr><td colspan="6" class="text-center py-10 text-slate-500">Tidak ada siswa yang cocok dengan pencarian.</td></tr>`}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function openStudentDetailModal(id) {
+            const s = S.students.find(x => x.id === id);
+            if (!s) return;
+
+            const old = document.getElementById('modal-student-detail'); if (old) old.remove();
+            const modal = document.createElement('div');
+            modal.id = 'modal-student-detail';
+            modal.className = 'fixed inset-0 bg-ink/70 backdrop-blur-sm z-50 flex items-center justify-center p-4';
+            modal.onclick = () => modal.remove();
+            modal.innerHTML = `
+                <div class="modal-card max-w-2xl w-full relative p-6 max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+                    <button onclick="document.getElementById('modal-student-detail').remove()" class="modal-close" aria-label="Tutup">✕</button>
+
+                    <div class="flex items-center gap-3 border-b-2 pb-3 mb-4 pr-10" style="border-color:var(--line)">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center text-2xl border-2 border-edge" style="background:var(--pink-soft)">🐰</div>
+                        <div>
+                            <h3 class="text-2xl font-bold leading-tight">${esc(s.child_name)}</h3>
+                            <p class="text-sm text-slate-500">Kelas ${s.grade} SD &bull; ${esc(s.package)} &bull; <span class="chip ${payChip(s.payment_status)}">${esc(s.payment_status)}</span></p>
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-3 text-sm mb-6">
+                        ${[
+                            ['Nama orang tua', s.parent_name],
+                            ['Tempat, tanggal lahir', s.pob + ', ' + fmtDate(s.dob)],
+                            ['Asal sekolah', s.school_origin],
+                            ['No. WhatsApp', s.whatsapp],
+                            ['Username login', (s.email || '').split('@')[0]]
+                        ].map(([l, v]) => `<div class="p-3 rounded-xl" style="background:var(--paper)"><span class="text-slate-500 block text-xs font-bold">${l}</span><strong>${esc(v)}</strong></div>`).join('')}
+                        <div class="p-3 rounded-xl sm:col-span-2" style="background:var(--paper)">
+                            <span class="text-slate-500 block text-xs font-bold">Alamat rumah</span><strong>${esc(s.address)}</strong>
+                        </div>
+                        <div class="p-3 rounded-xl sm:col-span-2" style="background:var(--pink-soft)">
+                            <span class="block text-xs font-extrabold mb-0.5" style="color:var(--pink-deep)"><i class="fa-solid fa-circle-exclamation mr-1"></i> Kebutuhan &amp; kendala belajar</span>
+                            <p class="leading-relaxed font-semibold">${esc(s.needs_challenges)}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-2 pt-3 border-t-2" style="border-color:var(--line)">
+                        <button onclick="document.getElementById('modal-student-detail').remove()" class="btn btn-ghost btn-sm">Tutup</button>
+                        <button onclick="document.getElementById('modal-student-detail').remove(); openAdminManageModal('${s.id}')" class="btn btn-pink btn-sm">Kelola progress</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function openAdminManageModal(id) {
+            S.selectedStudentId = id;
+            const s = S.students.find(x => x.id === id);
+            if (!s) return;
+
+            $('#admin-modal-student-name').textContent = s.child_name;
+            $('#admin-modal-student-sub').textContent = `Kelas ${s.grade} SD • Paket ${s.package} • ${s.payment_status}`;
+
+            S.adminModalTab = 'absensi';
+            renderAdminModalTabContent();
+            openModal('modal-admin-manage-student');
+        }
+
+        function setAdminModalTab(tab) {
+            S.adminModalTab = tab;
+            renderAdminModalTabContent();
+        }
+
+        function renderAdminModalTabContent() {
+            const s = S.students.find(x => x.id === S.selectedStudentId);
+            if (!s) return;
+
+            ['absensi', 'notes', 'guide', 'portfolio', 'status'].forEach(t => {
+                const btn = $('#btn-mod-' + t);
+                if (btn) btn.classList.toggle('on', t === S.adminModalTab);
+            });
+
+            const container = $('#admin-modal-content');
+            const trash = 'text-red-600 hover:text-red-800 p-2 text-sm shrink-0';
+
+            if (S.adminModalTab === 'absensi') {
+                container.innerHTML = `
+                    <div class="space-y-5">
+                        <form onsubmit="handleAdminAddAttendance(event)" class="p-4 rounded-2xl space-y-3" style="background:var(--sky-soft)">
+                            <h4 class="font-bold text-base">Tambah sesi absensi</h4>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                                <div><label class="lbl">Tanggal</label><input name="date" type="date" required class="inp"></div>
+                                <div><label class="lbl">Hari</label>
+                                    <select name="day" class="inp"><option>Senin</option><option>Selasa</option><option>Rabu</option><option>Kamis</option><option>Jumat</option><option>Sabtu</option></select>
+                                </div>
+                                <div class="col-span-2 sm:col-span-1"><label class="lbl">Status</label>
+                                    <select name="status" class="inp"><option value="Hadir">Hadir</option><option value="Izin">Izin</option><option value="Sakit">Sakit</option><option value="Tanpa Keterangan">Tanpa Keterangan</option></select>
+                                </div>
+                            </div>
+                            <div><label class="lbl">Topik / materi sesi</label><input name="topic" required placeholder="Contoh: Perkalian Dasar 1-5" class="inp"></div>
+                            <div><label class="lbl">Catatan sesi</label><textarea name="notes" rows="2" placeholder="Catatan singkat jalannya sesi" class="inp"></textarea></div>
+                            <button type="submit" class="btn btn-blue btn-block">Simpan absensi</button>
+                        </form>
+
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-base">Riwayat sesi (${s.attendance.length})</h4>
+                            ${s.attendance.length ? s.attendance.map(a => `
+                                <div class="p-3 bg-white border-[1.5px] rounded-xl flex justify-between items-start gap-3 text-sm" style="border-color:var(--line)">
+                                    <div>
+                                        <span class="font-bold">${esc(a.day)}, ${esc(fmtDate(a.date))}</span>
+                                        <span class="chip ${statusChip(a.status)} ml-1">${esc(a.status)}</span>
+                                        <p class="font-bold mt-0.5" style="color:var(--sky-deep)">${esc(a.topic)}</p>
+                                        <p class="text-slate-600 text-[13px]">${esc(a.notes)}</p>
+                                    </div>
+                                    <button onclick="handleAdminDeleteAttendance('${a.id}')" class="${trash}" title="Hapus sesi ini" aria-label="Hapus sesi ini"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>`).join('') : `<p class="text-slate-500 text-sm">Belum ada data absensi.</p>`}
+                        </div>
+                    </div>
+                `;
+            } else if (S.adminModalTab === 'notes') {
+                container.innerHTML = `
+                    <div class="space-y-5">
+                        <form onsubmit="handleAdminAddNote(event)" class="p-4 rounded-2xl space-y-3" style="background:var(--sky-soft)">
+                            <h4 class="font-bold text-base">Tambah catatan akademik</h4>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div><label class="lbl">Tanggal</label><input name="date" type="date" required class="inp"></div>
+                                <div><label class="lbl">Topik</label><input name="topic" required placeholder="Contoh: Perkalian & Soal Cerita" class="inp"></div>
+                            </div>
+                            <div><label class="lbl">Isi catatan</label><textarea name="content" required rows="3" placeholder="Perkembangan akademik siswa" class="inp"></textarea></div>
+                            <button type="submit" class="btn btn-blue btn-block">Tambah catatan</button>
+                        </form>
+
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-base">Catatan akademik (${s.academic_notes.length})</h4>
+                            ${s.academic_notes.length ? s.academic_notes.map(n => `
+                                <div class="p-3 bg-white border-[1.5px] rounded-xl flex justify-between items-start gap-3 text-sm" style="border-color:var(--line)">
+                                    <div class="space-y-1">
+                                        <div class="flex items-center gap-2"><span class="font-bold" style="color:var(--sky-deep)">${esc(n.topic)}</span><span class="text-slate-500 text-xs">${esc(fmtDate(n.date))}</span></div>
+                                        <p class="text-slate-700 leading-relaxed">${esc(n.content)}</p>
+                                    </div>
+                                    <button onclick="handleAdminDeleteNote('${n.id}')" class="${trash}" title="Hapus catatan" aria-label="Hapus catatan"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>`).join('') : `<p class="text-slate-500 text-sm">Belum ada catatan akademik.</p>`}
+                        </div>
+                    </div>
+                `;
+            } else if (S.adminModalTab === 'guide') {
+                container.innerHTML = `
+                    <div class="space-y-5">
+                        <form onsubmit="handleAdminAddGuide(event)" class="p-4 rounded-2xl space-y-3" style="background:var(--butter-soft)">
+                            <h4 class="font-bold text-base">Tambah Parent Guide</h4>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div><label class="lbl">Tanggal</label><input name="date" type="date" required class="inp"></div>
+                                <div><label class="lbl">Judul panduan</label><input name="title" required placeholder="Contoh: Latihan Perkalian di Rumah" class="inp"></div>
+                            </div>
+                            <div><label class="lbl">Saran untuk orang tua</label><textarea name="content" required rows="3" placeholder="Saran pendampingan belajar di rumah" class="inp"></textarea></div>
+                            <button type="submit" class="btn btn-butter btn-block">Tambah Parent Guide</button>
+                        </form>
+
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-base">Parent Guide (${s.parent_guides.length})</h4>
+                            ${s.parent_guides.length ? s.parent_guides.map(g => `
+                                <div class="p-3 bg-white border-[1.5px] rounded-xl flex justify-between items-start gap-3 text-sm" style="border-color:var(--line)">
+                                    <div class="space-y-1">
+                                        <div class="flex items-center gap-2"><span class="font-bold">${esc(g.title)}</span><span class="text-slate-500 text-xs">${esc(fmtDate(g.date))}</span></div>
+                                        <p class="text-slate-700 leading-relaxed">${esc(g.content)}</p>
+                                    </div>
+                                    <button onclick="handleAdminDeleteGuide('${g.id}')" class="${trash}" title="Hapus panduan" aria-label="Hapus panduan"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>`).join('') : `<p class="text-slate-500 text-sm">Belum ada panduan orang tua.</p>`}
+                        </div>
+                    </div>
+                `;
+            } else if (S.adminModalTab === 'portfolio') {
+                container.innerHTML = `
+                    <div class="space-y-5">
+                        <form onsubmit="handleAdminAddPortfolio(event)" class="p-4 rounded-2xl space-y-3" style="background:var(--pink-soft)">
+                            <h4 class="font-bold text-base">Tambah foto LKPD / portofolio</h4>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div><label class="lbl">Judul foto</label><input name="title" required placeholder="Contoh: LKPD Perkalian 1-5" class="inp"></div>
+                                <div><label class="lbl">Kategori</label>
+                                    <select name="category" class="inp"><option value="LKPD">LKPD</option><option value="Hasil Karya">Hasil Karya</option><option value="Aktivitas Kelas">Aktivitas Kelas</option></select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div><label class="lbl">Tanggal</label><input name="date" type="date" required class="inp"></div>
+                                <div><label class="lbl">URL gambar</label><input name="image_url" type="url" required placeholder="https://..." class="inp"></div>
+                            </div>
+                            <div><label class="lbl">Deskripsi</label><textarea name="description" rows="2" placeholder="Keterangan singkat hasil karya atau LKPD" class="inp"></textarea></div>
+                            <button type="submit" class="btn btn-pink btn-block">Simpan foto</button>
+                        </form>
+
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-base">Album portofolio (${s.portfolio.length})</h4>
+                            ${s.portfolio.length ? `
+                                <div class="grid grid-cols-2 gap-3">
+                                    ${s.portfolio.map(p => `
+                                        <div class="p-2 border-[1.5px] rounded-xl bg-white flex flex-col justify-between text-sm" style="border-color:var(--line)">
+                                            <div>
+                                                <img src="${esc(safeUrl(p.image_url))}" class="w-full h-24 object-cover rounded-lg mb-2" alt="${esc(p.title)}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';">
+                                                <span class="chip chip-pink">${esc(p.category)}</span>
+                                                <h5 class="font-bold truncate mt-1">${esc(p.title)}</h5>
+                                            </div>
+                                            <button onclick="handleAdminDeletePortfolio('${p.id}')" class="btn btn-danger btn-sm mt-2"><i class="fa-solid fa-trash-can"></i> Hapus</button>
+                                        </div>`).join('')}
+                                </div>
+                            ` : `<p class="text-slate-500 text-sm">Belum ada portofolio.</p>`}
+                        </div>
+                    </div>
+                `;
+            } else if (S.adminModalTab === 'status') {
+                container.innerHTML = `
+                    <form onsubmit="handleAdminUpdateStatus(event)" class="space-y-4 p-4 rounded-2xl" style="background:var(--sky-soft)">
+                        <h4 class="font-bold text-base">Ubah status pembayaran &amp; paket</h4>
+                        <div>
+                            <label class="lbl">Status pembayaran</label>
+                            <select name="payment_status" class="inp">
+                                <option value="Sudah Bayar" ${s.payment_status === 'Sudah Bayar' ? 'selected' : ''}>Sudah bayar (buka akses games)</option>
+                                <option value="Pending" ${s.payment_status === 'Pending' ? 'selected' : ''}>Pending (games terkunci)</option>
+                                <option value="Belum Bayar" ${s.payment_status === 'Belum Bayar' ? 'selected' : ''}>Belum bayar</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="lbl">Paket belajar</label>
+                            <select name="package" class="inp">
+                                <option value="Private" ${s.package === 'Private' ? 'selected' : ''}>Private (1 siswa)</option>
+                                <option value="Bunny Duo" ${s.package === 'Bunny Duo' ? 'selected' : ''}>Bunny Duo (2 siswa)</option>
+                                <option value="Bunny Trio" ${s.package === 'Bunny Trio' ? 'selected' : ''}>Bunny Trio (3 siswa)</option>
+                                <option value="Bunny Squad" ${s.package === 'Bunny Squad' ? 'selected' : ''}>Bunny Squad (4-5 siswa)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-blue btn-block">Simpan perubahan</button>
+                    </form>
+                `;
+            }
+        }
+
+        // ===== ADMIN HANDLERS =====
+        async function adminInsert(table, row, okMsg) {
+            const { error } = await db.from(table).insert({ ...row, student_id: S.selectedStudentId });
+            if (error) { toast('Gagal menyimpan: ' + error.message); return; }
+            toast(okMsg);
+            await loadAdminData(); render(); renderAdminModalTabContent();
+        }
+        async function adminDelete(table, id, okMsg) {
+            if (!confirm('Hapus data ini? Tindakan ini tidak bisa dibatalkan.')) return;
+            const { error } = await db.from(table).delete().eq('id', id);
+            if (error) { toast('Gagal menghapus: ' + error.message); return; }
+            toast(okMsg);
+            await loadAdminData(); render(); renderAdminModalTabContent();
+        }
+
+        function handleAdminAddAttendance(e) {
+            e.preventDefault(); const v = fd(e.target);
+            adminInsert('attendance', { date: v.date, day: v.day, status: v.status, topic: v.topic, notes: v.notes }, 'Absensi berhasil ditambahkan');
+        }
+        function handleAdminDeleteAttendance(id) { adminDelete('attendance', id, 'Sesi absensi dihapus'); }
+
+        function handleAdminAddNote(e) {
+            e.preventDefault(); const v = fd(e.target);
+            adminInsert('academic_notes', { date: v.date, topic: v.topic, content: v.content }, 'Catatan akademik berhasil ditambahkan');
+        }
+        function handleAdminDeleteNote(id) { adminDelete('academic_notes', id, 'Catatan akademik dihapus'); }
+
+        function handleAdminAddGuide(e) {
+            e.preventDefault(); const v = fd(e.target);
+            adminInsert('parent_guides', { date: v.date, title: v.title, content: v.content }, 'Parent Guide berhasil ditambahkan');
+        }
+        function handleAdminDeleteGuide(id) { adminDelete('parent_guides', id, 'Parent Guide dihapus'); }
+
+        function handleAdminAddPortfolio(e) {
+            e.preventDefault(); const v = fd(e.target);
+            if (!/^https?:\/\//i.test(v.image_url)) { toast('URL gambar harus diawali http:// atau https://'); return; }
+            adminInsert('portfolio', { title: v.title, category: v.category, date: v.date, image_url: v.image_url, description: v.description }, 'Foto portofolio berhasil ditambahkan');
+        }
+        function handleAdminDeletePortfolio(id) { adminDelete('portfolio', id, 'Foto portofolio dihapus'); }
+
+        async function handleAdminUpdateStatus(e) {
+            e.preventDefault();
+            const v = fd(e.target);
+            const { error } = await db.from('students').update({ payment_status: v.payment_status, package: v.package }).eq('id', S.selectedStudentId);
+            if (error) { toast('Gagal memperbarui: ' + error.message); return; }
+            toast('Status pembayaran & paket diperbarui');
+            closeModal('modal-admin-manage-student');
+            await loadAdminData(); render();
+        }
+
+        // ===== ADMIN: GAMES =====
+        function renderAdminGames() {
+            return `
+                <div class="grid md:grid-cols-5 gap-6">
+                    <form onsubmit="handleSaveGame(event)" class="card md:col-span-2 space-y-3 h-fit">
+                        <h3 class="text-lg font-bold">Tambah game edukasi</h3>
+                        <div><label class="lbl">Target kelas</label>
+                            <select name="grade" class="inp">${[1,2,3,4,5,6].map(g => `<option value="${g}">Kelas ${g} SD</option>`).join('')}</select>
+                        </div>
+                        <div><label class="lbl">Mata pelajaran</label>
+                            <select name="subject" class="inp"><option value="Matematika">Matematika</option><option value="Bahasa Inggris">Bahasa Inggris</option><option value="Umum">Umum</option></select>
+                        </div>
+                        <div><label class="lbl">Judul game</label><input name="title" required class="inp" placeholder="Contoh: Wordwall Kuis Perkalian"></div>
+                        <div><label class="lbl">Link game</label><input name="url" type="url" required class="inp" placeholder="https://wordwall.net/..."></div>
+                        <button type="submit" class="btn btn-pink btn-block">Simpan game</button>
+                    </form>
+
+                    <div class="md:col-span-3 space-y-4">
+                        ${[1,2,3,4,5,6].map(g => {
+                            const games = S.games.filter(x => x.grade === g);
+                            return `
+                                <div class="card p-4">
+                                    <h4 class="font-bold mb-2" style="color:var(--sky-deep)">Kelas ${g} SD</h4>
+                                    ${games.length ? games.map(x => `
+                                        <div class="flex justify-between items-center py-2 border-t text-sm gap-3" style="border-color:#ECEAD6">
+                                            <div><span class="font-bold">${esc(x.title)}</span> <span class="chip chip-info ml-1">${esc(x.subject)}</span></div>
+                                            <button onclick="deleteGame('${x.id}')" class="text-red-600 hover:underline text-xs font-extrabold shrink-0">Hapus</button>
+                                        </div>`).join('') : `<p class="text-sm text-slate-500">Belum ada game.</p>`}
+                                </div>`;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        async function handleSaveGame(e) {
+            e.preventDefault();
+            const v = fd(e.target);
+            if (!/^https?:\/\//i.test(v.url)) { toast('Link game harus diawali http:// atau https://'); return; }
+            const { error } = await db.from('games').insert({ title: v.title, url: v.url, grade: parseInt(v.grade), subject: v.subject });
+            if (error) { toast('Gagal menyimpan game: ' + error.message); return; }
+            toast('Game berhasil ditambahkan');
+            await loadAdminData(); render();
+        }
+        async function deleteGame(id) {
+            if (!confirm('Hapus game ini?')) return;
+            const { error } = await db.from('games').delete().eq('id', id);
+            if (error) { toast('Gagal menghapus: ' + error.message); return; }
+            toast('Game dihapus');
+            await loadAdminData(); render();
+        }
+
+        // ===== ADMIN: TESTIMONI =====
+        function renderAdminTesti() {
+            if (!S.testimonials.length) return `<div class="card text-center py-10 text-slate-500">Belum ada testimoni masuk.</div>`;
+            return `
+                <div class="space-y-4">
+                    ${S.testimonials.map(t => `
+                        <div class="card flex flex-wrap justify-between items-center gap-4">
+                            <div class="space-y-1 max-w-2xl">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="font-bold">${esc(t.parent_name)}, orang tua ${esc(t.child_name)}</span>
+                                    <span style="color:#F5A623" class="text-sm">${'★'.repeat(t.rating)}</span>
+                                    <span class="chip ${t.status === 'Approved' ? 'chip-ok' : (t.status === 'Rejected' ? 'chip-bad' : 'chip-warn')}">${esc(t.status)}</span>
+                                </div>
+                                <p class="text-slate-600 text-[15px]">“${esc(t.review)}”</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="moderateTesti('${t.id}', 'Approved')" class="btn btn-blue btn-sm">Setujui</button>
+                                <button onclick="moderateTesti('${t.id}', 'Rejected')" class="btn btn-ghost btn-sm">Tolak</button>
+                            </div>
+                        </div>`).join('')}
+                </div>
+            `;
+        }
+
+        async function moderateTesti(id, status) {
+            const { error } = await db.from('testimonials').update({ status }).eq('id', id);
+            if (error) { toast('Gagal memperbarui: ' + error.message); return; }
+            toast('Status testimoni: ' + status);
+            await loadAdminData(); render();
+        }
+
+        // ===== ROUTER =====
+        function render() {
+            updateNavActions();
+            const app = $('#app');
+            if (S.page === 'home') {
+                app.innerHTML = renderHome();
+            } else if (S.page === 'portal') {
+                if (S.loading) {
+                    app.innerHTML = `<div class="max-w-md mx-auto my-24 text-center"><i class="fa-solid fa-spinner fa-spin text-3xl" style="color:var(--sky-deep)"></i><p class="mt-3 font-bold">Memuat data...</p></div>`;
+                } else if (!S.user) {
+                    app.innerHTML = `<div class="max-w-md mx-auto my-16 sticker p-8 text-center"><h2 class="text-2xl font-bold mb-2">Masuk dulu</h2><p class="text-slate-600 mb-5">Masuk untuk melihat portal belajar.</p><button onclick="openLoginModal()" class="btn btn-pink">Masuk</button></div>`;
+                } else {
+                    app.innerHTML = S.isAdmin ? renderAdminPortal() : renderStudentPortal();
+                }
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => { render(); loadSession(); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                ['modal-lightbox', 'modal-admin-manage-student'].forEach(closeModal);
+                ['modal-login', 'modal-student-detail'].forEach(id => { const m = document.getElementById(id); if (m) m.remove(); });
+            }
+        });
+    </script>
+</body>
+</html>
