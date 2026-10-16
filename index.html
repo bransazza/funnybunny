@@ -350,7 +350,7 @@
         // Orang tua masuk dengan USERNAME. Supabase mewajibkan email, jadi username diubah
         // otomatis menjadi "username@AUTH_EMAIL_DOMAIN" di belakang layar.
         // Gunakan domain yang valid (sebaiknya milik Anda sendiri). Jangan diubah setelah ada pengguna.
-        const AUTH_EMAIL_DOMAIN = 'funnybunny.id';
+        const AUTH_EMAIL_DOMAIN = 'gmail.com';
         const toEmail = u => {
             const x = String(u || '').trim().toLowerCase();
             return x.includes('@') ? x : x + '@' + AUTH_EMAIL_DOMAIN;   // admin boleh pakai email aslinya
