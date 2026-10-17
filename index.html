@@ -206,6 +206,30 @@
 
         .burst { position: absolute; top: -1.6rem; right: -1rem; z-index: 20; width: 6.2rem; height: 6.2rem; border-radius: 50%; background: var(--butter); border: 2px solid var(--edge); box-shadow: 3px 3px 0 var(--edge); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-family: 'Fredoka', sans-serif; font-weight: 700; line-height: 1; font-size: 1.15rem; transform: rotate(10deg); }
         .burst small { font-family: 'Nunito', sans-serif; font-size: .7rem; font-weight: 800; margin-top: .25rem; }
+
+        /* ---------- Mobile ---------- */
+        @media (max-width: 640px) {
+            .inp { font-size: 16px; }                       /* cegah iPhone memperbesar layar saat mengetik */
+            .btn { min-height: 44px; }
+            .btn-sm { min-height: 40px; padding: .5rem 1rem; }
+            .tab { padding: .65rem 1rem; }
+            .filter-pill { padding: .45rem .95rem; }
+            .mtab { padding: .6rem .9rem; }
+            .modal-close { width: 2.5rem; height: 2.5rem; }
+            .burst { right: -.2rem; top: -1.9rem; width: 5.2rem; height: 5.2rem; font-size: 1rem; }
+            .price { font-size: 2.1rem; }
+            .sticker { box-shadow: 4px 4px 0 var(--edge); }
+            .notebook::before { left: 2rem; }
+
+            /* tabel menjadi kartu */
+            .tbl-stack, .tbl-stack tbody, .tbl-stack tr { display: block; width: 100%; }
+            .tbl-stack thead { display: none; }
+            .tbl-stack tbody tr { padding: .6rem .25rem; border-bottom: 2px solid var(--line); }
+            .tbl-stack tbody tr:last-child { border-bottom: 0; }
+            .tbl-stack tbody td { display: grid; grid-template-columns: 6rem 1fr; gap: .6rem; align-items: start; border: 0; padding: .3rem .9rem; }
+            .tbl-stack tbody td[data-label]::before { content: attr(data-label); font-weight: 800; font-size: .72rem; color: var(--ink-soft); padding-top: .2rem; }
+            .tbl-stack tbody td[colspan] { display: block; }
+        }
         .stat-top { height: 6px; border-radius: 6px 6px 0 0; margin: -1.25rem -1.25rem 1rem; }
     </style>
 </head>
@@ -659,9 +683,9 @@
                                                     <span class="text-sm font-bold" style="color:var(--pink-deep)">${g.label}</span>
                                                 </div>
                                             </div>
-                                            <div class="text-right">
+                                            <div class="text-left sm:text-right">
                                                 <div class="price" style="font-size:1.8rem">${g.price}<span class="text-sm font-bold text-slate-500" style="font-family:Nunito"> /orang</span></div>
-                                                <div class="flex items-center justify-end gap-2 flex-wrap mt-1"><span class="chip chip-ok"><i class="fa-solid fa-gift"></i> Trial gratis 1x</span><span class="text-xs font-extrabold" style="color:var(--mint-deep)">${g.save}</span></div>
+                                                <div class="flex items-center sm:justify-end gap-2 flex-wrap mt-1"><span class="chip chip-ok"><i class="fa-solid fa-gift"></i> Trial gratis 1x</span><span class="text-xs font-extrabold" style="color:var(--mint-deep)">${g.save}</span></div>
                                             </div>
                                             <button onclick="choosePackage('${g.name}')" class="btn btn-ghost btn-sm w-full sm:w-auto">Pilih</button>
                                         </div>`).join('')}
@@ -711,7 +735,7 @@
                                 </div>
                             </div>
 
-                            <div><label class="lbl">Kebutuhan &amp; kendala belajar anak</label><textarea name="needs_challenges" rows="2" class="inp" placeholder="Contoh: Belum lancar perkalian 6-9, kurang percaya diri membaca Bahasa Inggris"></textarea></div>
+                            <div><label class="lbl">Kebutuhan &amp; kendala belajar anak</label><textarea name="needs_challenges" rows="3" class="inp" placeholder="Contoh: Belum lancar perkalian 6-9, kurang percaya diri membaca Bahasa Inggris"></textarea></div>
 
                             <div class="rounded-2xl p-4 border-2 border-dashed" style="border-color:var(--sky);background:var(--sky-soft)">
                                 <p class="text-sm font-extrabold mb-3"><i class="fa-solid fa-key mr-1"></i> Akun untuk masuk ke portal</p>
@@ -778,7 +802,7 @@
                 ` : ''}
 
                 <!-- Tombol WhatsApp melayang -->
-                <a href="https://wa.me/${ADMIN_WA}" target="_blank" rel="noopener" aria-label="Chat WhatsApp admin" class="btn btn-pink fixed bottom-5 right-5 z-30" style="padding:.8rem 1.1rem">
+                <a href="https://wa.me/${ADMIN_WA}" target="_blank" rel="noopener" aria-label="Chat WhatsApp admin" class="btn btn-pink fixed bottom-4 right-4 z-30" style="padding:.8rem 1.1rem">
                     <i class="fa-brands fa-whatsapp text-xl"></i> <span class="hidden sm:inline">Chat admin</span>
                 </a>
             `;
@@ -957,15 +981,15 @@
                         </div>
                         ${s.attendance && s.attendance.length ? `
                             <div class="overflow-x-auto">
-                                <table class="tbl">
+                                <table class="tbl tbl-stack">
                                     <thead><tr><th>Hari, tanggal</th><th>Status</th><th>Materi sesi</th><th>Catatan tutor</th></tr></thead>
                                     <tbody>
                                         ${s.attendance.map(a => `
                                             <tr>
-                                                <td class="font-bold whitespace-nowrap">${esc(a.day)}, ${esc(fmtDate(a.date))}</td>
-                                                <td><span class="chip ${statusChip(a.status)}">${esc(a.status)}</span></td>
-                                                <td class="font-bold" style="color:var(--sky-deep)">${esc(a.topic || '-')}</td>
-                                                <td class="text-slate-600 min-w-[220px]">${esc(a.notes || '-')}</td>
+                                                <td data-label="Hari, tanggal" class="font-bold sm:whitespace-nowrap">${esc(a.day)}, ${esc(fmtDate(a.date))}</td>
+                                                <td data-label="Status"><span class="chip ${statusChip(a.status)}">${esc(a.status)}</span></td>
+                                                <td data-label="Materi" class="font-bold" style="color:var(--sky-deep)">${esc(a.topic || '-')}</td>
+                                                <td data-label="Catatan" class="text-slate-600 sm:min-w-[220px]">${esc(a.notes || '-')}</td>
                                             </tr>`).join('')}
                                     </tbody>
                                 </table>
@@ -1216,22 +1240,22 @@
 
                     <div class="card p-0 overflow-hidden">
                         <div class="overflow-x-auto">
-                            <table class="tbl">
+                            <table class="tbl tbl-stack">
                                 <thead>
                                     <tr><th>Nama anak</th><th>Kelas &amp; sekolah</th><th>Paket</th><th>No. WA</th><th>Status bayar</th><th class="text-center">Aksi</th></tr>
                                 </thead>
                                 <tbody>
                                     ${list.length ? list.map(s => `
                                         <tr>
-                                            <td class="font-bold">${esc(s.child_name)}<span class="block text-xs text-slate-500 font-semibold">Ortu: ${esc(s.parent_name)}</span></td>
-                                            <td class="font-semibold">Kelas ${s.grade} SD<span class="block text-xs text-slate-500">${esc(s.school_origin)}</span></td>
-                                            <td><span class="chip chip-info">${esc(s.package)}</span></td>
-                                            <td class="whitespace-nowrap">${esc(s.whatsapp)}</td>
-                                            <td><span class="chip ${payChip(s.payment_status)}">${esc(s.payment_status)}</span></td>
-                                            <td class="text-center whitespace-nowrap">
+                                            <td data-label="Nama anak" class="font-bold"><div>${esc(s.child_name)}<span class="block text-xs text-slate-500 font-semibold">Ortu: ${esc(s.parent_name)}</span></div></td>
+                                            <td data-label="Kelas" class="font-semibold"><div>Kelas ${s.grade} SD<span class="block text-xs text-slate-500">${esc(s.school_origin)}</span></div></td>
+                                            <td data-label="Paket"><span class="chip chip-info">${esc(s.package)}</span></td>
+                                            <td data-label="No. WA" class="sm:whitespace-nowrap">${esc(s.whatsapp)}</td>
+                                            <td data-label="Status bayar"><span class="chip ${payChip(s.payment_status)}">${esc(s.payment_status)}</span></td>
+                                            <td data-label="Aksi" class="sm:text-center sm:whitespace-nowrap"><div class="flex flex-wrap gap-2 sm:justify-center">
                                                 <button onclick="openStudentDetailModal('${s.id}')" class="btn btn-ghost btn-sm">Biodata</button>
                                                 <button onclick="openAdminManageModal('${s.id}')" class="btn btn-pink btn-sm">Kelola progress</button>
-                                            </td>
+                                            </div></td>
                                         </tr>`).join('') : `
                                         <tr><td colspan="6" class="text-center py-10 text-slate-500">Tidak ada siswa yang cocok dengan pencarian.</td></tr>`}
                                 </tbody>
@@ -1324,12 +1348,12 @@
                     <div class="space-y-5">
                         <form onsubmit="handleAdminAddAttendance(event)" class="p-4 rounded-2xl space-y-3" style="background:var(--sky-soft)">
                             <h4 class="font-bold text-base">Tambah sesi absensi</h4>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                                 <div><label class="lbl">Tanggal</label><input name="date" type="date" required class="inp"></div>
                                 <div><label class="lbl">Hari</label>
                                     <select name="day" class="inp"><option>Senin</option><option>Selasa</option><option>Rabu</option><option>Kamis</option><option>Jumat</option><option>Sabtu</option></select>
                                 </div>
-                                <div class="col-span-2 sm:col-span-1"><label class="lbl">Status</label>
+                                <div><label class="lbl">Status</label>
                                     <select name="status" class="inp"><option value="Hadir">Hadir</option><option value="Izin">Izin</option><option value="Sakit">Sakit</option><option value="Tanpa Keterangan">Tanpa Keterangan</option></select>
                                 </div>
                             </div>
@@ -1358,7 +1382,7 @@
                     <div class="space-y-5">
                         <form onsubmit="handleAdminAddNote(event)" class="p-4 rounded-2xl space-y-3" style="background:var(--sky-soft)">
                             <h4 class="font-bold text-base">Tambah catatan akademik</h4>
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                 <div><label class="lbl">Tanggal</label><input name="date" type="date" required class="inp"></div>
                                 <div><label class="lbl">Topik</label><input name="topic" required placeholder="Contoh: Perkalian & Soal Cerita" class="inp"></div>
                             </div>
@@ -1384,7 +1408,7 @@
                     <div class="space-y-5">
                         <form onsubmit="handleAdminAddGuide(event)" class="p-4 rounded-2xl space-y-3" style="background:var(--butter-soft)">
                             <h4 class="font-bold text-base">Tambah Parent Guide</h4>
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                 <div><label class="lbl">Tanggal</label><input name="date" type="date" required class="inp"></div>
                                 <div><label class="lbl">Judul panduan</label><input name="title" required placeholder="Contoh: Latihan Perkalian di Rumah" class="inp"></div>
                             </div>
@@ -1410,13 +1434,13 @@
                     <div class="space-y-5">
                         <form onsubmit="handleAdminAddPortfolio(event)" class="p-4 rounded-2xl space-y-3" style="background:var(--pink-soft)">
                             <h4 class="font-bold text-base">Tambah foto LKPD / portofolio</h4>
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                 <div><label class="lbl">Judul foto</label><input name="title" required placeholder="Contoh: LKPD Perkalian 1-5" class="inp"></div>
                                 <div><label class="lbl">Kategori</label>
                                     <select name="category" class="inp"><option value="LKPD">LKPD</option><option value="Hasil Karya">Hasil Karya</option><option value="Aktivitas Kelas">Aktivitas Kelas</option></select>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                 <div><label class="lbl">Tanggal</label><input name="date" type="date" required class="inp"></div>
                                 <div><label class="lbl">URL gambar</label><input name="image_url" type="url" required placeholder="https://..." class="inp"></div>
                             </div>
