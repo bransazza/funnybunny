@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#4A8CAD">
-    <meta name="description" content="Funny Bunny Course: bimbingan belajar Matematika dan Bahasa Inggris untuk siswa kelas 1-6 SD di Sumedang. Trial gratis 1 kali.">
+    <meta name="description" content="Funny Bunny Course: bimbingan belajar Matematika, Bahasa Inggris, dan Membaca untuk siswa kelas 1-6 SD di Sumedang. Trial gratis 1 kali.">
     <title>Funny Bunny Course - Learn, Leap, Shine!</title>
     <link rel="icon" type="image/png" href="logo.png" onerror="this.href='https://cdn-icons-png.flaticon.com/512/3069/3069172.png'">
 
@@ -258,7 +258,7 @@
                     <span class="logo-font text-2xl" style="color:var(--pink)">Funny Bunny Course</span>
                 </div>
                 <p class="text-slate-300 text-sm leading-relaxed mb-4 max-w-sm">
-                    Bimbingan belajar Matematika &amp; Bahasa Inggris untuk siswa kelas 1–6 SD. Belajar menyenangkan, privat dan kelompok kecil.
+                    Bimbingan belajar Matematika, Bahasa Inggris, dan Membaca untuk siswa kelas 1–6 SD. Belajar menyenangkan, privat dan kelompok kecil.
                 </p>
                 <span class="inline-block text-ink text-sm font-extrabold px-4 py-1 rounded-full" style="background:var(--butter)">Learn, Leap, Shine!</span>
             </div>
@@ -339,9 +339,9 @@
         // ===== KONFIGURASI DATABASE (SUPABASE) =====
         // Ganti dua nilai ini dengan data dari Supabase: Project Settings > API
         const SUPABASE_URL = 'https://lfslmkwusgtzelvlimeh.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxmc2xta3d1c2d0emVsdmxpbWVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIxMDIyMzMsImV4cCI6MjEwNzY3ODIzM30.jgC8bYcnyiY4b7HDIlcR3ZGr9HQoeF60YmeVI7PRBuU';
+        const SUPABASE_ANON_KEY = 'ISI_DENGAN_ANON_PUBLIC_KEY';
 
-        const DB_READY = !SUPABASE_URL.startsWith('ISI_') && !!window.supabase;
+        const DB_READY = !SUPABASE_URL.startsWith('ISI_') && !SUPABASE_ANON_KEY.startsWith('ISI_') && !!window.supabase;
         const db = DB_READY ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
         if (!db) console.warn('Database belum dihubungkan. Isi SUPABASE_URL dan SUPABASE_ANON_KEY di index.html.');
 
@@ -349,7 +349,8 @@
 
         // Orang tua masuk dengan USERNAME. Supabase mewajibkan email, jadi username diubah
         // otomatis menjadi "username@AUTH_EMAIL_DOMAIN" di belakang layar.
-        // Gunakan domain yang valid (sebaiknya milik Anda sendiri). Jangan diubah setelah ada pengguna.
+        // Harus domain email yang valid (gmail.com aman dipakai). Tidak ada email yang dikirim selama "Confirm email" dimatikan.
+        // Jangan diubah setelah ada pengguna terdaftar.
         const AUTH_EMAIL_DOMAIN = 'gmail.com';
         const toEmail = u => {
             const x = String(u || '').trim().toLowerCase();
@@ -528,7 +529,7 @@
                                 <i class="fa-solid fa-gift"></i> Free entry: trial gratis 1 kali
                             </span>
                             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05]">
-                                Belajar Matematika &amp; Bahasa Inggris jadi menyenangkan.
+                                Belajar Matematika, Bahasa Inggris, dan Membaca jadi menyenangkan.
                             </h1>
                             <p class="text-slate-600 text-base md:text-lg leading-relaxed max-w-xl mx-auto md:mx-0">
                                 Untuk siswa kelas 1–6 SD. Pilih belajar privat atau kelompok kecil, mulai dari <strong class="text-ink">Rp10.000 per sesi</strong>.
@@ -556,14 +557,18 @@
                                     <img src="logo.png" alt="Logo Funny Bunny Course" class="w-44 h-44 mx-auto rounded-full object-contain -mt-1">
                                     <p class="text-sm font-bold text-slate-500 mt-1">Learn, Leap, Shine!</p>
 
-                                    <div class="grid grid-cols-2 gap-3 mt-5">
-                                        <div class="rounded-2xl p-3 border-2 border-edge" style="background:var(--pink-soft)">
-                                            <div class="text-4xl">🧮</div>
-                                            <div class="font-bold mt-1 leading-tight">Matematika</div>
+                                    <div class="grid grid-cols-3 gap-2.5 mt-5">
+                                        <div class="rounded-2xl p-2.5 border-2 border-edge" style="background:var(--pink-soft)">
+                                            <div class="text-3xl">🧮</div>
+                                            <div class="font-bold mt-1 leading-tight text-sm">Matematika</div>
                                         </div>
-                                        <div class="rounded-2xl p-3 border-2 border-edge" style="background:var(--sky-soft)">
-                                            <div class="text-4xl">📕</div>
-                                            <div class="font-bold mt-1 leading-tight">Bahasa Inggris</div>
+                                        <div class="rounded-2xl p-2.5 border-2 border-edge" style="background:var(--sky-soft)">
+                                            <div class="text-3xl">📕</div>
+                                            <div class="font-bold mt-1 leading-tight text-sm">Bahasa Inggris</div>
+                                        </div>
+                                        <div class="rounded-2xl p-2.5 border-2 border-edge" style="background:var(--butter-soft)">
+                                            <div class="text-3xl">📖</div>
+                                            <div class="font-bold mt-1 leading-tight text-sm">Membaca</div>
                                         </div>
                                     </div>
                                     <p class="text-sm font-bold text-slate-600 mt-3">Untuk siswa kelas 1–6 SD</p>
@@ -599,7 +604,7 @@
                         <p class="text-slate-600 mt-2">Untuk siswa kelas 1–6 SD. Materi mengikuti kurikulum sekolah dan disesuaikan dengan kebutuhan anak.</p>
                     </div>
 
-                    <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                    <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
                         <div class="card card-hover p-7 text-center" style="background:var(--pink-soft);border-color:#FFD3DC">
                             <div class="w-20 h-20 mx-auto rounded-3xl bg-white border-2 border-edge flex items-center justify-center text-5xl" style="box-shadow:4px 4px 0 var(--edge)">🧮</div>
                             <h3 class="text-2xl font-bold mt-4">Matematika</h3>
@@ -608,7 +613,12 @@
                         <div class="card card-hover p-7 text-center" style="background:var(--sky-soft);border-color:#C5DCEE">
                             <div class="w-20 h-20 mx-auto rounded-3xl bg-white border-2 border-edge flex items-center justify-center text-5xl" style="box-shadow:4px 4px 0 var(--edge)">📕</div>
                             <h3 class="text-2xl font-bold mt-4">Bahasa Inggris</h3>
-                            <p class="text-slate-700 mt-2 leading-relaxed">Kosakata (<em>vocabulary</em>), tata bahasa dasar (<em>grammar</em>), membaca (<em>reading</em>), dan percakapan sederhana agar anak berani bicara.</p>
+                            <p class="text-slate-700 mt-2 leading-relaxed">Kosakata (<em>vocabulary</em>), tata bahasa dasar (<em>grammar</em>), dan percakapan sederhana agar anak berani bicara.</p>
+                        </div>
+                        <div class="card card-hover p-7 text-center" style="background:var(--butter-soft);border-color:#F2E3A0">
+                            <div class="w-20 h-20 mx-auto rounded-3xl bg-white border-2 border-edge flex items-center justify-center text-5xl" style="box-shadow:4px 4px 0 var(--edge)">📖</div>
+                            <h3 class="text-2xl font-bold mt-4">Membaca</h3>
+                            <p class="text-slate-700 mt-2 leading-relaxed">Mengenal huruf dan suku kata, membaca lancar, sampai memahami isi bacaan, dengan cara yang menyenangkan.</p>
                         </div>
                     </div>
                 </section>
@@ -1519,7 +1529,7 @@
                             <select name="grade" class="inp">${[1,2,3,4,5,6].map(g => `<option value="${g}">Kelas ${g} SD</option>`).join('')}</select>
                         </div>
                         <div><label class="lbl">Mata pelajaran</label>
-                            <select name="subject" class="inp"><option value="Matematika">Matematika</option><option value="Bahasa Inggris">Bahasa Inggris</option><option value="Umum">Umum</option></select>
+                            <select name="subject" class="inp"><option value="Matematika">Matematika</option><option value="Bahasa Inggris">Bahasa Inggris</option><option value="Membaca">Membaca</option><option value="Umum">Umum</option></select>
                         </div>
                         <div><label class="lbl">Judul game</label><input name="title" required class="inp" placeholder="Contoh: Wordwall Kuis Perkalian"></div>
                         <div><label class="lbl">Link game</label><input name="url" type="url" required class="inp" placeholder="https://wordwall.net/..."></div>
